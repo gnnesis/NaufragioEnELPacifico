@@ -1,0 +1,40 @@
+package ventanas;
+
+
+
+import java.awt.BorderLayout;
+import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.event.*;
+import javax.swing.*;
+
+@SuppressWarnings("serial")
+public class Ventana_Prueba extends JFrame{
+
+	public static void main(String[] args) {
+		Ventana_Prueba vent = new Ventana_Prueba();
+		vent.setVisible( true );
+	}
+	
+	public Ventana_Prueba() {
+		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		setSize( 600, 400 );
+		setAlwaysOnTop( true );
+		setLocationRelativeTo( null );
+	
+	
+	// 1. Crear contenedores
+	JPanel pSuperior = new JPanel();
+	
+	//Creamos componentes
+	JButton b1 = new JButton("Este botón");
+	
+	
+	// 3. Formato de contenedores
+	getContentPane().setLayout( new BorderLayout() );
+	//5. Añadir componentes a contenedores
+	getContentPane().add( pSuperior, BorderLayout.NORTH);
+	pSuperior.add(b1);
+	}
+}
