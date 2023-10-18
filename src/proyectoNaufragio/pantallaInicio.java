@@ -13,7 +13,7 @@ import javax.swing.border.Border;
 public class pantallaInicio extends JFrame {
 	
 	public pantallaInicio(){
-		Color cRosa = new Color(224,33,138);
+		Color cRosa = new Color(255,102,196);
 		Color cRosaClaro = new Color (255,128,234);
 		this.setSize(new Dimension(400,400));
 		this.setTitle("Naufragio en el Pacífico");
