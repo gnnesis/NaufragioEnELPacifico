@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -15,10 +17,12 @@ public class pantallaInicio extends JFrame {
 	public pantallaInicio(){
 		Color cRosa = new Color(224,33,138);
 		Color cRosaClaro = new Color (255,128,234);
+		
 		this.setSize(new Dimension(400,400));
 		this.setTitle("Naufragio en el Pacífico");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLayout(new BorderLayout());
+		
 		JPanel norte = new JPanel();
 		JPanel sur = new JPanel();
 		sur.setLayout(new GridLayout(2,1)); //(filas,columnas)
@@ -34,10 +38,21 @@ public class pantallaInicio extends JFrame {
 		norte.add(titulo);
 		
 		//SUR
-		JButton bEnter = new JButton("ENTER");
+		JButton bEnter = new JButton("ENTRAR");
 		bEnter.setBackground(cRosa);
+		bEnter.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new pantallaModoJuego();
+				dispose();
+				
+			}
+		});
+		
 		sur.add(bEnter);
-		JButton bRegistro = new JButton("REGISTRO");
+		JButton bRegistro = new JButton("REGISTRAR");
 		bRegistro.setBackground(cRosa);
 		sur.add(bRegistro);
 		
