@@ -71,7 +71,6 @@ public class pantallaInicio extends JFrame {
 		
 		
 	
-		
 	
 		
 		this.add(norte,BorderLayout.NORTH);
