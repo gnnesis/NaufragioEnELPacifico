@@ -5,8 +5,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.Icon;
+import java.awt.Image;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -27,15 +33,22 @@ public class pantallaInicio extends JFrame {
 		JPanel sur = new JPanel();
 		sur.setLayout(new GridLayout(2,1)); //(filas,columnas)
 		JPanel centro = new JPanel();
-		centro.setLayout(new GridLayout(3,1));
+		centro.setLayout(new GridLayout(3,2));
 		JPanel este = new JPanel();
 		JPanel oeste = new JPanel();
+	
+		JLabel limagen = new JLabel();
+		ImageIcon imagen = new ImageIcon("Media/logoNaufragio.png");
+		Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT));
+		limagen.setIcon(icono);
 		
 		//NORTE
-		JLabel titulo = new JLabel("NAUFRAGIO EN EL PACÍFICO");
+		/*JLabel titulo = new JLabel("NAUFRAGIO EN EL PACÍFICO");
 		titulo.setForeground(cRosa);
 		titulo.setFont(new Font("Arial", Font.BOLD, 22));
-		norte.add(titulo);
+		norte.add(titulo);*/
+		
+		norte.add(limagen);
 		
 		//SUR
 		JButton bEnter = new JButton("ENTRAR");
