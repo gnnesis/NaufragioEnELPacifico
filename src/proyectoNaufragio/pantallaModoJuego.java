@@ -52,21 +52,48 @@ public class pantallaModoJuego extends JFrame {
 		sur.add(bJugar);
 		
 		//CENTRO
-		JLabel lTablero = new JLabel("TABLERO");
-		//lTablero.setHorizontalAlignment(SwingConstants.CENTER);
-		lTablero.setFont(subtitulo);
-		centro.add(lTablero);
-		JLabel lTematica = new JLabel("TEMATICA");
-		lTematica.setFont(subtitulo);
-		centro.add(lTematica);
-		
-		
-		JTextArea  lDificultad = new JTextArea  ("DIFICULTAD: \n *Fácil 9x9 \n *Medio 12x12 \n *Difícil");
-		centro.add(lDificultad);
-		JTextArea  lElegirTema = new JTextArea  ("*Clásico \n *Tema1 \n *Tema2");
-		centro.add(lElegirTema);
-		JTextArea lDiseño = new JTextArea ("DISEÑO: \n *Rosa \n *Azul \n *Naranja");
-		centro.add(lDiseño);
+		//CENTRO
+				JLabel lTablero = new JLabel("DIFICULTAD");
+				//lTablero.setHorizontalAlignment(SwingConstants.CENTER);
+				lTablero.setFont(subtitulo);
+				centro.add(lTablero);
+				JLabel lTematica = new JLabel("TEMATICA");
+				lTematica.setFont(subtitulo);
+				centro.add(lTematica);
+				JPanel pDificultad = new JPanel(new GridLayout(3,1));
+				JPanel pTematica = new JPanel(new GridLayout(5,1));
+				ButtonGroup bgDificultad = new ButtonGroup();
+				JRadioButton rbFacil = new JRadioButton("Facil");
+				rbFacil.setSelected(true);
+				JRadioButton rbMedio = new JRadioButton("Medio");
+				JRadioButton rbDificil = new JRadioButton("Dificil");
+				bgDificultad.add(rbFacil);
+				bgDificultad.add(rbMedio);
+				bgDificultad.add(rbDificil);
+				pDificultad.add(rbFacil);
+				pDificultad.add(rbMedio);
+				pDificultad.add(rbDificil);
+				ButtonGroup bgTematica = new ButtonGroup();
+				JRadioButton rbClasico = new JRadioButton("Clasico");
+				rbClasico.setSelected(true);
+				JRadioButton rbNavidad = new JRadioButton("Navidad");
+				JRadioButton rbHalloween = new JRadioButton("Halloween");
+				JRadioButton rbVerano = new JRadioButton("Verano");
+				JRadioButton rbPrimavera = new JRadioButton("Primavera");
+				bgTematica.add(rbClasico);
+				bgTematica.add(rbNavidad);
+				bgTematica.add(rbHalloween);
+				bgTematica.add(rbVerano);
+				bgTematica.add(rbPrimavera);
+				pTematica.add(rbClasico);
+				pTematica.add(rbNavidad);
+				pTematica.add(rbHalloween);
+				pTematica.add(rbVerano);
+				pTematica.add(rbPrimavera);
+				
+				
+				centro.add(pDificultad);
+				centro.add(pTematica);
 		
 
 		

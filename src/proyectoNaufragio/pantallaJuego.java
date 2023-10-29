@@ -1,15 +1,17 @@
 package proyectoNaufragio;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
-import javax.swing.border.Border;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.Timer;
 
 public class pantallaJuego extends JFrame{
 	private int numClicks = 0;
@@ -24,15 +26,33 @@ public class pantallaJuego extends JFrame{
 	private  JLabel l8 = new JLabel ("0");
 	private final JLabel l9 = new JLabel ("Hundidos: ");
 	private  JLabel l10 = new JLabel ("0");
+	private int minutos = 0;
+	private int segundos = 0;
 	
 	public pantallaJuego(){
 		
+		this.setTitle("Naufragio en el Pacífico");
 		this.setSize(new Dimension(600,600));
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		
-	
-		
 		this.setLayout(new BorderLayout());
+		Timer tiempo = new Timer(1000, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				segundos++;
+				
+				if(segundos == 60)
+				{
+					segundos = 0;
+					minutos++;
+				}
+				
+				l2.setText(String.format("%02d:%02d", minutos, segundos));
+			}
+			
+		});
+		
+		tiempo.start();
 		JPanel pantNorte = new JPanel();
 		JPanel pantSur = new JPanel();
 		JPanel pantCentro = new JPanel();

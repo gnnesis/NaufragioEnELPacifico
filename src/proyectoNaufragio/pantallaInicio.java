@@ -39,6 +39,8 @@ public class pantallaInicio extends JFrame {
 		
 		//SUR
 		JButton bEnter = new JButton("ENTRAR");
+		JPanel s1= new JPanel();
+		JPanel s2 = new JPanel();
 		bEnter.setBackground(cRosa);
 		bEnter.addActionListener(new ActionListener() {
 			
@@ -50,24 +52,31 @@ public class pantallaInicio extends JFrame {
 				
 			}
 		});
-		
-		sur.add(bEnter);
+		s1.add(bEnter);
+		sur.add(s1);
 		JButton bRegistro = new JButton("REGISTRAR");
 		bRegistro.setBackground(cRosa);
-		sur.add(bRegistro);
+		s2.add(bRegistro);
+		sur.add(s2);
 		
 		//CENTRO
 		JLabel inicio = new JLabel("Iniciar sesión");
+		JPanel p1= new JPanel();
+		JPanel p2= new JPanel();
 		inicio.setHorizontalAlignment(SwingConstants.CENTER);
 		inicio.setFont(new Font("Arial", Font.BOLD, 18));
 		centro.add(inicio);
 		JTextField nick = new JTextField("Introduce tu nick");  //Hacer un listener
 		nick.setSize(new Dimension(50,50));
 		nick.setBackground(cRosaClaro);
-		centro.add(nick);
+		nick.setColumns(30);
+		p1.add(nick);
+		centro.add(p1);
 		JPasswordField pass = new JPasswordField();
 		pass.setBackground(cRosaClaro);
-		centro.add(pass);
+		pass.setColumns(30);
+		p2.add(pass);
+		centro.add(p2);
 		
 		
 	
