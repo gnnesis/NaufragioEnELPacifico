@@ -5,20 +5,24 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 
 @SuppressWarnings("serial")
-public class pantallaInicio extends JFrame {
+public class PantallaInicio extends JFrame {
 	
-	public pantallaInicio(){
+	public PantallaInicio(){
 		Color cRosa = new Color(255,102,196);
 		Color cRosaClaro = new Color (255,128,234);
+		
 		this.setSize(new Dimension(400,400));
 		this.setTitle("Naufragio en el Pacífico");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLayout(new BorderLayout());
+		
 		JPanel norte = new JPanel();
 		JPanel sur = new JPanel();
 		sur.setLayout(new GridLayout(2,1)); //(filas,columnas)
@@ -34,29 +38,48 @@ public class pantallaInicio extends JFrame {
 		norte.add(titulo);
 		
 		//SUR
-		JButton bEnter = new JButton("ENTER");
+		JButton bEnter = new JButton("ENTRAR");
+		JPanel s1= new JPanel();
+		JPanel s2 = new JPanel();
 		bEnter.setBackground(cRosa);
-		sur.add(bEnter);
-		JButton bRegistro = new JButton("REGISTRO");
+		bEnter.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new PantallaModoJuego();
+				dispose();
+				
+			}
+		});
+		s1.add(bEnter);
+		sur.add(s1);
+		JButton bRegistro = new JButton("REGISTRAR");
 		bRegistro.setBackground(cRosa);
-		sur.add(bRegistro);
+		s2.add(bRegistro);
+		sur.add(s2);
 		
 		//CENTRO
 		JLabel inicio = new JLabel("Iniciar sesión");
+		JPanel p1= new JPanel();
+		JPanel p2= new JPanel();
 		inicio.setHorizontalAlignment(SwingConstants.CENTER);
 		inicio.setFont(new Font("Arial", Font.BOLD, 18));
 		centro.add(inicio);
 		JTextField nick = new JTextField("Introduce tu nick");  //Hacer un listener
 		nick.setSize(new Dimension(50,50));
 		nick.setBackground(cRosaClaro);
-		centro.add(nick);
+		nick.setColumns(30);
+		p1.add(nick);
+		centro.add(p1);
 		JPasswordField pass = new JPasswordField();
 		pass.setBackground(cRosaClaro);
-		centro.add(pass);
+		pass.setColumns(30);
+		p2.add(pass);
+		centro.add(p2);
 		
 		
 	
-		
 	
 		
 		this.add(norte,BorderLayout.NORTH);
@@ -73,7 +96,7 @@ public class pantallaInicio extends JFrame {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new pantallaInicio();
+		new PantallaInicio();
 
 	}
 
