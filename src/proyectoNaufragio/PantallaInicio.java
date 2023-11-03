@@ -12,9 +12,9 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 @SuppressWarnings("serial")
-public class pantallaInicio extends JFrame {
+public class PantallaInicio extends JFrame {
 	
-	public pantallaInicio(){
+	public PantallaInicio(){
 		Color cRosa = new Color(255,102,196);
 		Color cRosaClaro = new Color (255,128,234);
 		
@@ -47,7 +47,7 @@ public class pantallaInicio extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new pantallaModoJuego();
+				new PantallaModoJuego();
 				dispose();
 				
 			}
@@ -96,7 +96,7 @@ public class pantallaInicio extends JFrame {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new pantallaInicio();
+		new PantallaInicio();
 
 	}
 

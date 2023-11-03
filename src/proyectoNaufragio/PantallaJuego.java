@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
 
-public class pantallaJuego extends JFrame{
+public class PantallaJuego extends JFrame{
 	private int numClicks = 0;
 	
 	private final JLabel l1 = new JLabel ("Tiempo");
@@ -29,7 +29,7 @@ public class pantallaJuego extends JFrame{
 	private int minutos = 0;
 	private int segundos = 0;
 	
-	public pantallaJuego(){
+	public PantallaJuego(){
 		
 		this.setTitle("Naufragio en el Pacífico");
 		this.setSize(new Dimension(600,600));
@@ -135,7 +135,7 @@ public class pantallaJuego extends JFrame{
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new pantallaJuego();
+		new PantallaJuego();
 
 	}
 

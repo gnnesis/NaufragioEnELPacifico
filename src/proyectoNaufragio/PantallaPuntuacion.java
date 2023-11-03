@@ -9,9 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class pantallaPuntuacion extends JFrame {
+public class PantallaPuntuacion extends JFrame {
 
-    public pantallaPuntuacion() {
+    public PantallaPuntuacion() {
     	Color cRosa= new Color(255,102,196);
         // Básicos
         this.setVisible(true);
@@ -57,7 +57,7 @@ public class pantallaPuntuacion extends JFrame {
     }
 
     public static void main(String[] args) {
-    	new pantallaPuntuacion();
+    	new PantallaPuntuacion();
     }
 }
 
