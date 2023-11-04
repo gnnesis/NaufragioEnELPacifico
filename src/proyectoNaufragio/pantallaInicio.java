@@ -19,9 +19,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
-public class PantallaInicio extends JFrame {
+public class pantallaInicio extends JFrame {
 	
-    public PantallaInicio() {
+    public pantallaInicio() {
         Color cRosa = new Color(255, 102, 196);
         Color cRosaClaro = new Color(255, 128, 234);
 
@@ -60,7 +60,7 @@ public class PantallaInicio extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
-                new PantallaModoJuego();
+                new pantallaModoJuego();
                 dispose();
             }
         });
@@ -102,6 +102,6 @@ public class PantallaInicio extends JFrame {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        new PantallaInicio();
+        new pantallaInicio();
     }
 }
