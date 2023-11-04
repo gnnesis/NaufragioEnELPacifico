@@ -12,9 +12,9 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 @SuppressWarnings("serial")
-public class PantallaModoJuego extends JFrame {
+public class pantallaModoJuego extends JFrame {
 	
-	public PantallaModoJuego(){
+	public pantallaModoJuego(){
 		Color cRosa = new Color(255,102,196);
 		Color cRosaClaro = new Color (255,128,234);
 		Font subtitulo = new Font("Arial", Font.BOLD, 18);	
@@ -23,10 +23,10 @@ public class PantallaModoJuego extends JFrame {
 		this.setTitle("Naufragio en el Pacífico");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLayout(new BorderLayout());
+		
 		JPanel norte = new JPanel();
 		JPanel sur = new JPanel();
-		JPanel centro = new JPanel();
-		centro.setLayout(new GridLayout(3,2));
+		JPanel centro = new JPanel(new GridLayout(3,2));
 		JPanel este = new JPanel();
 		JPanel oeste = new JPanel();
 		
@@ -44,7 +44,7 @@ public class PantallaModoJuego extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new PantallaJuego();
+				new pantallaJuego();
 				dispose();
 				
 			}
@@ -116,7 +116,7 @@ public class PantallaModoJuego extends JFrame {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new PantallaModoJuego();
+		new pantallaModoJuego();
 
 	}
 
