@@ -14,7 +14,6 @@ public class PantallaPuntuacion extends JFrame {
     public PantallaPuntuacion() {
     	Color cRosa= new Color(255,102,196);
         // Básicos
-        this.setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setSize(600, 400);
         this.setTitle("Puntuación");
@@ -54,6 +53,9 @@ public class PantallaPuntuacion extends JFrame {
         pSuperior.add(lTitulo);
         pCentral.add(lResumen);
         pInferior.add(bJugar) ;
+        
+        this.setVisible(true);
+
     }
 
     public static void main(String[] args) {

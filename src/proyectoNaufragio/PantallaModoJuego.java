@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 
 @SuppressWarnings("serial")
 public class PantallaModoJuego extends JFrame {

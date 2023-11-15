@@ -1,18 +1,21 @@
 package proyectoNaufragio;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
 
+import entidades.Casilla;
+
+@SuppressWarnings("serial")
 public class PantallaJuego extends JFrame{
 	private int numClicks = 0;
 	
@@ -73,26 +76,35 @@ public class PantallaJuego extends JFrame{
 		
 		for (int i=0; i<9;i++) {
 			for (int j=0; j<9;j++) {
-				JButton boton = new JButton();
+				Casilla boton = new Casilla();
 				boton.addActionListener(new ActionListener() {
-					
+
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						// TODO Auto-generated method stub
 						numClicks++;
 						l4.setText(String.valueOf(numClicks));
 						
-					
+						boton.setEnabled(false);
+						if(!boton.isDestapado())
+						{
+							boton.setDestapado(true);
+							if(boton.isHayBarco())
+							{
+								boton.setBackground(Color.red);
+							}
+							else
+							{
+								boton.setBackground(Color.blue);
+							}
+						}
 						
 					}
+					
 				});
 				pantCentro.add(boton);
 				
-				
-				
 			}
 		}
-		
 		
 		//ESTE
 		JTextArea barcos = new JTextArea("Barco1 \n Barco2 \n Barco3 \n Barco4 \n Barco5 \n");
@@ -126,6 +138,8 @@ public class PantallaJuego extends JFrame{
 		this.add(pantEste,BorderLayout.EAST);
 		this.add(pantOeste,BorderLayout.WEST);
 		this.setVisible(true);
+		
+		
 	
 		
 		
@@ -133,11 +147,11 @@ public class PantallaJuego extends JFrame{
 	
 	
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new PantallaJuego();
 
-	}
+	}*/
 
 
 }
