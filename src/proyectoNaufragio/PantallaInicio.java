@@ -75,6 +75,7 @@ public class PantallaInicio extends JFrame {
         JLabel inicio = new JLabel("Iniciar sesión");
         JPanel p1 = new JPanel();
         JPanel p2 = new JPanel();
+       
         inicio.setHorizontalAlignment(SwingConstants.CENTER);
         inicio.setFont(new Font("Arial", Font.BOLD, 18));
         centro.add(inicio);
