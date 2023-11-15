@@ -1,19 +1,17 @@
 package entidades;
 
-
-import java.awt.Image;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 
 public class Usuario {
 	private String nickname;
 	private String contrasena;
-	//public Image foto;
 	
-	public Usuario(String nick, String contraseña, Image foto) {
-		super();
-		this.nickname = nickname;
-		this.contrasena = contrasena;
-		//this.foto = foto;
+	public Usuario(String nick, String pass) {
+		this.nickname = nick;
+		this.contrasena = pass;
 	}
 
 	public String getNickname() {
@@ -31,18 +29,31 @@ public class Usuario {
 	public void setContrasena(String contraseña) {
 		this.contrasena = contraseña;
 	}
-
-	//public Image getFoto() {
-		//return foto;
-	//}
-
-	//public void setFoto(Image foto) {
-	//	this.foto = foto;
-	//} 
 	
 	public boolean comprobarContrasena(String pass) {
-		return pass.equals(contrasena);
+		String hashedPassword = getMd5(pass);
+		return contrasena.equals(hashedPassword);
 		
 	}
+	
+	private String getMd5(String input) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] messageDigest = md.digest(input.getBytes());
+			
+			BigInteger no = new BigInteger(1, messageDigest);
+			
+			String hashtext = no.toString(16);
+			while (hashtext.length()<32) {
+				hashtext = "0" + hashtext;
+			}
+			
+			return hashtext;
+			
+		} catch (NoSuchAlgorithmException e) {
+			return null;
+		}
+	}
+	
 
 }
