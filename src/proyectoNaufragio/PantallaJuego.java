@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
@@ -31,6 +32,7 @@ public class PantallaJuego extends JFrame{
 	private  JLabel l10 = new JLabel ("0");
 	private int minutos = 0;
 	private int segundos = 0;
+	private Casilla[][] tablero;
 	
 	public PantallaJuego(){
 		
@@ -74,9 +76,11 @@ public class PantallaJuego extends JFrame{
 		
 		//CENTRO
 		
+		tablero = new Casilla[9][9]; //temporal
 		for (int i=0; i<9;i++) {
 			for (int j=0; j<9;j++) {
 				Casilla boton = new Casilla();
+				tablero[i][j] = boton;
 				boton.addActionListener(new ActionListener() {
 
 					@Override
@@ -91,6 +95,12 @@ public class PantallaJuego extends JFrame{
 							if(boton.isHayBarco())
 							{
 								boton.setBackground(Color.red);
+								boolean terminado = juegoTerminado();
+								if (terminado) {
+									JOptionPane.showMessageDialog(null, "Has terminado!");
+									new PantallaPuntuacion();
+									dispose();
+								}
 							}
 							else
 							{
@@ -105,6 +115,7 @@ public class PantallaJuego extends JFrame{
 				
 			}
 		}
+		colocarBarcos();
 		
 		//ESTE
 		JTextArea barcos = new JTextArea("Barco1 \n Barco2 \n Barco3 \n Barco4 \n Barco5 \n");
@@ -145,6 +156,25 @@ public class PantallaJuego extends JFrame{
 		
 	}
 	
+	private boolean juegoTerminado() {
+		boolean fin = true;
+		//cada vez que se destape la casilla hay que comprobar si el juego ha terminado.
+		for (int i=0; i<9;i++) {
+			for (int j=0; j<9;j++) {
+				if (tablero[i][j].isHayBarco()&& !tablero[i][j].isDestapado()) {
+					fin = false;
+				}
+				
+			}
+			}
+		return fin;
+		
+	}
+	
+	private void colocarBarcos() {
+		tablero[0][0].setHayBarco(true);
+		tablero[0][1].setHayBarco(true);
+	}
 	
 	
 	/*public static void main(String[] args) {
