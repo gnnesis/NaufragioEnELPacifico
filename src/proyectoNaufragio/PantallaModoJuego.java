@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.*;
 
@@ -17,6 +19,7 @@ import javax.swing.*;
 public class PantallaModoJuego extends JFrame {
 	
 	private static final String FICH_TEMATICAS = "Data/tematica.csv";
+	private Logger LOG = Logger.getLogger(PantallaModoJuego.class.getName());
 	
 	public PantallaModoJuego(){
 		Color cRosa = new Color(255,102,196);
@@ -131,6 +134,7 @@ public class PantallaModoJuego extends JFrame {
 			JRadioButton rb = new JRadioButton(s);
 			tematicas.add(rb);
 			p.add(rb);
+			LOG.log(Level.INFO, "Se incluye la tematica " + s);
 		}
 		
 		return p;
