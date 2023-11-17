@@ -7,11 +7,16 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class PantallaModoJuego extends JFrame {
+	
+	private static final String FICH_TEMATICAS = "Data/tematica.csv";
 	
 	public PantallaModoJuego(){
 		Color cRosa = new Color(255,102,196);
@@ -60,7 +65,6 @@ public class PantallaModoJuego extends JFrame {
 				lTematica.setFont(subtitulo);
 				centro.add(lTematica);
 				JPanel pDificultad = new JPanel(new GridLayout(3,1));
-				JPanel pTematica = new JPanel(new GridLayout(5,1));
 				ButtonGroup bgDificultad = new ButtonGroup();
 				JRadioButton rbFacil = new JRadioButton("Facil");
 				rbFacil.setSelected(true);
@@ -72,23 +76,9 @@ public class PantallaModoJuego extends JFrame {
 				pDificultad.add(rbFacil);
 				pDificultad.add(rbMedio);
 				pDificultad.add(rbDificil);
-				ButtonGroup bgTematica = new ButtonGroup();
-				JRadioButton rbClasico = new JRadioButton("Clasico");
-				rbClasico.setSelected(true);
-				JRadioButton rbNavidad = new JRadioButton("Navidad");
-				JRadioButton rbHalloween = new JRadioButton("Halloween");
-				JRadioButton rbVerano = new JRadioButton("Verano");
-				JRadioButton rbPrimavera = new JRadioButton("Primavera");
-				bgTematica.add(rbClasico);
-				bgTematica.add(rbNavidad);
-				bgTematica.add(rbHalloween);
-				bgTematica.add(rbVerano);
-				bgTematica.add(rbPrimavera);
-				pTematica.add(rbClasico);
-				pTematica.add(rbNavidad);
-				pTematica.add(rbHalloween);
-				pTematica.add(rbVerano);
-				pTematica.add(rbPrimavera);
+				
+				JPanel pTematica = cargarTematicas();
+				
 				
 				
 				centro.add(pDificultad);
@@ -110,13 +100,40 @@ public class PantallaModoJuego extends JFrame {
 		
 	}
 	
-	
-	
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		new PantallaModoJuego();
-
+	private JPanel cargarTematicas()
+	{
+		final String separador = ";";
+		ArrayList<String> temas = new ArrayList<>();
+		JPanel p;
+		String tematica;
+		ButtonGroup tematicas = new ButtonGroup();
+		
+		BufferedReader br = null;
+		try
+		{
+			br = new BufferedReader(new FileReader(FICH_TEMATICAS));
+			while((tematica = br.readLine()) != null)
+			{
+				String[] params = tematica.split(separador);
+				temas.add(params[0]);
+			}
+			br.close();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		p = new JPanel(new GridLayout(temas.size(),1));
+		
+		for(String s : temas)
+		{
+			JRadioButton rb = new JRadioButton(s);
+			tematicas.add(rb);
+			p.add(rb);
+		}
+		
+		return p;
 	}
 
 }
