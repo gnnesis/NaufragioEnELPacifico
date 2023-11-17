@@ -4,9 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,7 +24,7 @@ import entidades.Casilla;
 @SuppressWarnings("serial")
 public class PantallaJuego extends JFrame{
 	private int numClicks = 0;
-	
+	private static final String DIR_IMAGENES = "Media/";
 	private final JLabel l1 = new JLabel ("Tiempo");
 	private JLabel l2 = new JLabel ("00:00");
 	private final JLabel l3 = new JLabel ("Clicks totales:");
@@ -34,8 +39,7 @@ public class PantallaJuego extends JFrame{
 	private int segundos = 0;
 	private Casilla[][] tablero;
 	
-	public PantallaJuego(){
-		
+	public PantallaJuego(String imagenCasilla){
 		this.setTitle("Naufragio en el Pacífico");
 		this.setSize(new Dimension(600,600));
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -58,6 +62,16 @@ public class PantallaJuego extends JFrame{
 		});
 		
 		tiempo.start();
+		String ruta = DIR_IMAGENES + imagenCasilla;
+		ImageIcon fondo = null;
+		try {
+			Image img = ImageIO.read(new File(ruta));
+			fondo = new ImageIcon(img);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		
 		JPanel pantNorte = new JPanel();
 		JPanel pantSur = new JPanel();
 		JPanel pantCentro = new JPanel();
@@ -80,6 +94,7 @@ public class PantallaJuego extends JFrame{
 		for (int i=0; i<9;i++) {
 			for (int j=0; j<9;j++) {
 				Casilla boton = new Casilla();
+				boton.setIcon(fondo);
 				tablero[i][j] = boton;
 				boton.addActionListener(new ActionListener() {
 

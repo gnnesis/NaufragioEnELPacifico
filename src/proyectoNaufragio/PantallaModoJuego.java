@@ -50,10 +50,9 @@ public class PantallaModoJuego extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				new PantallaJuego();
+				String tematica = "Clasico";
+				new PantallaJuego(tematica + ".png");
 				dispose();
-				
 			}
 		});
 		sur.add(bJugar);
