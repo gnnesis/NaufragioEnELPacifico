@@ -58,38 +58,25 @@ public class PantallaModoJuego extends JFrame {
 		sur.add(bJugar);
 		
 		//CENTRO
-		//CENTRO
-				JLabel lTablero = new JLabel("DIFICULTAD");
-				//lTablero.setHorizontalAlignment(SwingConstants.CENTER);
-				lTablero.setFont(subtitulo);
-				centro.add(lTablero);
-				JLabel lTematica = new JLabel("TEMATICA");
-				lTematica.setFont(subtitulo);
-				centro.add(lTematica);
-				JPanel pDificultad = cargarNiveles();
-				
-				
-				JPanel pTematica = cargarTematicas();
-				
-				
-				
-				centro.add(pDificultad);
-				centro.add(pTematica);
+		JLabel lTablero = new JLabel("DIFICULTAD");
+		lTablero.setFont(subtitulo);
+		centro.add(lTablero);
+		JLabel lTematica = new JLabel("TEMATICA");
+		lTematica.setFont(subtitulo);
+		centro.add(lTematica);
 		
+		JPanel pDificultad = cargarNiveles();
+		JPanel pTematica = cargarTematicas();
+		
+		centro.add(pDificultad);
+		centro.add(pTematica);
 
-		
-		
-			
-		
-		
-		
 		this.add(norte,BorderLayout.NORTH);
 		this.add(sur,BorderLayout.SOUTH);
 		this.add(centro, BorderLayout.CENTER);
 		this.add(este,BorderLayout.EAST);
 		this.add(oeste,BorderLayout.WEST);
 		this.setVisible(true);
-		
 	}
 	
 	private JPanel cargarTematicas()
@@ -163,5 +150,4 @@ public class PantallaModoJuego extends JFrame {
 		
 		return p;
 	}
-
 }

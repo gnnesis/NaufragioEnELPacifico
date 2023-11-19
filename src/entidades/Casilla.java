@@ -2,7 +2,6 @@ package entidades;
 
 import javax.swing.JButton;
 
-
 @SuppressWarnings("serial")
 public class Casilla extends JButton{
 	

@@ -38,9 +38,6 @@ public class PantallaPuntuacion extends JFrame {
         JLabel lTitulo = new JLabel("NAUFRAGIO EN EL PACÍFICO");
         JLabel lResumen = new JLabel("RESUMEN DE LA PARTIDA");
         JButton bJugar= new JButton("VOLVER A JUGAR");
-        //Cuadrado
-        /**Cuadrado cuadrado = new Cuadrado();
-        pCentral.add(cuadrado); // Añadir el cuadrado al panel pCentral**/
         
         //3.Diseño de componentes
         bJugar.setBackground(cRosa);
@@ -55,12 +52,5 @@ public class PantallaPuntuacion extends JFrame {
         pInferior.add(bJugar) ;
         
         this.setVisible(true);
-
-    }
-
-    public static void main(String[] args) {
-    	new PantallaPuntuacion();
     }
 }
-
-

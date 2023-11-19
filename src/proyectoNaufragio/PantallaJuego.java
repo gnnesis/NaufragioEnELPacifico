@@ -90,12 +90,9 @@ public class PantallaJuego extends JFrame{
 		pantNorte.add(titulo);
 		
 		
-		//SUR
-		
-		
 		//CENTRO
 		
-		tablero = new Casilla[9][9]; //temporal
+		tablero = new Casilla[9][9];
 		for (int i=0; i<9;i++) {
 			for (int j=0; j<9;j++) {
 				Casilla boton = new Casilla();
@@ -144,25 +141,16 @@ public class PantallaJuego extends JFrame{
 		pantEste.add(barcos);
 		
 		//OESTE
-		//JTextArea info = new JTextArea("Tiempo \n Clicks Totales \n Aguas \n Tocados \n Hundidos \n");
-		//pantOeste.add(info);
 		
 		pantOeste.add(l1);
-		
 		pantOeste.add(l2);
-		
 		pantOeste.add(l3);
-		
 		pantOeste.add(l4);
 		pantOeste.add(l5);
-		
 		pantOeste.add(l6);
 		pantOeste.add(l7);
-		
 		pantOeste.add(l8);
-		
 		pantOeste.add(l9);
-		
 		pantOeste.add(l10);
 		
 		this.add(pantNorte,BorderLayout.NORTH);
@@ -170,12 +158,7 @@ public class PantallaJuego extends JFrame{
 		this.add(pantCentro, BorderLayout.CENTER);
 		this.add(pantEste,BorderLayout.EAST);
 		this.add(pantOeste,BorderLayout.WEST);
-		this.setVisible(true);
-		
-		
-	
-		
-		
+		this.setVisible(true);		
 	}
 	
 	private boolean juegoTerminado() {
@@ -188,9 +171,8 @@ public class PantallaJuego extends JFrame{
 				}
 				
 			}
-			}
+		}
 		return fin;
-		
 	}
 	
 	private void colocarBarcos() {
@@ -198,12 +180,4 @@ public class PantallaJuego extends JFrame{
 		tablero[0][1].setHayBarco(true);
 	}
 	
-	
-	/*public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		new PantallaJuego();
-
-	}*/
-
-
 }

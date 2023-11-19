@@ -103,9 +103,4 @@ public class PantallaPerfil extends JFrame {
         this.add(pantOeste, BorderLayout.WEST);
         this.setVisible(true);
     }
-
-    public static void main(String args[]) {
-        new PantallaPerfil();
-    }
 }
-
