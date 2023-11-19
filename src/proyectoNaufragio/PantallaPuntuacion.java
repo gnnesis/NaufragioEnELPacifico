@@ -3,6 +3,9 @@ package proyectoNaufragio;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -38,6 +41,14 @@ public class PantallaPuntuacion extends JFrame {
         JLabel lTitulo = new JLabel("NAUFRAGIO EN EL PACÍFICO");
         JLabel lResumen = new JLabel("RESUMEN DE LA PARTIDA");
         JButton bJugar= new JButton("VOLVER A JUGAR");
+        bJugar.addActionListener(new ActionListener() {
+        	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new PantallaModoJuego();
+	        	dispose();	
+			}
+        });
         
         //3.Diseño de componentes
         bJugar.setBackground(cRosa);

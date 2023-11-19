@@ -8,6 +8,12 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,10 +24,17 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import entidades.Usuario;
+
 @SuppressWarnings("serial")
 public class PantallaInicio extends JFrame {
 	
-    public PantallaInicio() {
+	private static final String FICH_USUARIOS = "Data/usuarios.csv";
+	private static Logger LOG = Logger.getLogger(PantallaInicio.class.getName());
+	private JTextField nick;
+	private JPasswordField pass;
+	
+    public PantallaInicio(ArrayList<Usuario> usuarios) {
         Color cRosa = new Color(255, 102, 196);
         Color cRosaClaro = new Color(255, 128, 234);
 
@@ -44,11 +57,6 @@ public class PantallaInicio extends JFrame {
         limagen.setIcon(icono);
 
         // NORTE
-        /*JLabel titulo = new JLabel("NAUFRAGIO EN EL PACÍFICO");
-        titulo.setForeground(cRosa);
-        titulo.setFont(new Font("Arial", Font.BOLD, 22));
-        norte.add(titulo);*/
-
         norte.add(limagen);
 
         // SUR
@@ -59,9 +67,30 @@ public class PantallaInicio extends JFrame {
         bEnter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-                new PantallaModoJuego();
-                dispose();
+            	String username = nick.getText();
+            	String password = String.valueOf(pass.getPassword());
+            	
+            	for(Usuario u : usuarios)
+            	{
+            		if(u.getNickname().equals(username))
+            		{
+            			LOG.log(Level.INFO, "Usuario encontrado");
+            			System.out.println(password);
+            			if(u.comprobarContrasena(password))
+            			{
+            				
+            				LOG.log(Level.INFO, "Inicio de sesion correcto");
+            				new PantallaModoJuego();
+                            dispose();
+            			}
+            			else
+            			{
+            				LOG.log(Level.WARNING, "Contraseña introducida incorrecta");
+            			}
+            		}
+            	}
+            	
+                
             }
         });
         s1.add(bEnter);
@@ -79,17 +108,18 @@ public class PantallaInicio extends JFrame {
         inicio.setHorizontalAlignment(SwingConstants.CENTER);
         inicio.setFont(new Font("Arial", Font.BOLD, 18));
         centro.add(inicio);
-        JTextField nick = new JTextField("Introduce tu nick"); // Hacer un listener
+        nick = new JTextField("Introduce tu nick");
         nick.setSize(new Dimension(50, 50));
         nick.setBackground(cRosaClaro);
         nick.setColumns(30);
         p1.add(nick);
         centro.add(p1);
-        JPasswordField pass = new JPasswordField();
+        pass = new JPasswordField();
         pass.setBackground(cRosaClaro);
         pass.setColumns(30);
         p2.add(pass);
         centro.add(p2);
+        
         this.add(norte, BorderLayout.NORTH);
         this.add(sur, BorderLayout.SOUTH);
         this.add(centro, BorderLayout.CENTER);
@@ -99,6 +129,34 @@ public class PantallaInicio extends JFrame {
     }
 
     public static void main(String[] args) {
-        new PantallaInicio();
+    	ArrayList<Usuario> usuarios = cargarUsuarios();
+        new PantallaInicio(usuarios);
+    }
+    
+    private static ArrayList<Usuario> cargarUsuarios()
+    {
+    	ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+    	final String separador = ";";
+    	Usuario u;
+    	String linea;
+    	BufferedReader br = null;
+		try
+		{
+			br = new BufferedReader(new FileReader(FICH_USUARIOS));
+			while((linea = br.readLine()) != null)
+			{
+				String[] params = linea.split(separador);
+				u = new Usuario(params[0].trim(), params[1].trim());
+				usuarios.add(u);
+				LOG.log(Level.INFO, "Se incorpora un nuevo usuario al sistema");
+			}
+			br.close();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+    	
+    	return usuarios;
     }
 }
