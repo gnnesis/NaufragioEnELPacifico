@@ -90,9 +90,6 @@ public class PantallaInicio extends JFrame {
         pass.setColumns(30);
         p2.add(pass);
         centro.add(p2);
-
-  
-       
         this.add(norte, BorderLayout.NORTH);
         this.add(sur, BorderLayout.SOUTH);
         this.add(centro, BorderLayout.CENTER);
