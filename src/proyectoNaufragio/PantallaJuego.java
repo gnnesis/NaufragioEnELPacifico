@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -38,6 +40,8 @@ public class PantallaJuego extends JFrame{
 	private int minutos = 0;
 	private int segundos = 0;
 	private Casilla[][] tablero;
+	private Logger LOG = Logger.getLogger(PantallaJuego.class.getName());
+
 	
 	public PantallaJuego(String imagenCasilla){
 		this.setTitle("Naufragio en el Pacífico");
@@ -62,13 +66,14 @@ public class PantallaJuego extends JFrame{
 		});
 		
 		tiempo.start();
+		LOG.log(Level.INFO,"Cronómetro de juego iniciado.");
 		String ruta = DIR_IMAGENES + imagenCasilla;
 		ImageIcon fondo = null;
 		try {
 			Image img = ImageIO.read(new File(ruta));
 			fondo = new ImageIcon(img);
 		} catch (IOException e1) {
-			e1.printStackTrace();
+			LOG.log(Level.SEVERE,"Ha ocurrido un error cargando el icono de la celda.");
 		}
 		
 		
@@ -109,10 +114,12 @@ public class PantallaJuego extends JFrame{
 							boton.setDestapado(true);
 							if(boton.isHayBarco())
 							{
+								LOG.log(Level.INFO,"La celda contenia un barco.");
 								boton.setBackground(Color.red);
 								boolean terminado = juegoTerminado();
 								if (terminado) {
 									JOptionPane.showMessageDialog(null, "Has terminado!");
+									LOG.log(Level.INFO,"Juego finalizado.");
 									new PantallaPuntuacion();
 									dispose();
 								}
