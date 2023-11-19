@@ -19,11 +19,11 @@ import javax.swing.*;
 public class PantallaModoJuego extends JFrame {
 	
 	private static final String FICH_TEMATICAS = "Data/tematica.csv";
+	private static final String FICH_NIVELES = "Data/nivel.csv";
 	private Logger LOG = Logger.getLogger(PantallaModoJuego.class.getName());
 	
 	public PantallaModoJuego(){
 		Color cRosa = new Color(255,102,196);
-		Color cRosaClaro = new Color (255,128,234);
 		Font subtitulo = new Font("Arial", Font.BOLD, 18);	
 		
 		this.setSize(new Dimension(400,400));
@@ -66,18 +66,8 @@ public class PantallaModoJuego extends JFrame {
 				JLabel lTematica = new JLabel("TEMATICA");
 				lTematica.setFont(subtitulo);
 				centro.add(lTematica);
-				JPanel pDificultad = new JPanel(new GridLayout(3,1));
-				ButtonGroup bgDificultad = new ButtonGroup();
-				JRadioButton rbFacil = new JRadioButton("Facil");
-				rbFacil.setSelected(true);
-				JRadioButton rbMedio = new JRadioButton("Medio");
-				JRadioButton rbDificil = new JRadioButton("Dificil");
-				bgDificultad.add(rbFacil);
-				bgDificultad.add(rbMedio);
-				bgDificultad.add(rbDificil);
-				pDificultad.add(rbFacil);
-				pDificultad.add(rbMedio);
-				pDificultad.add(rbDificil);
+				JPanel pDificultad = cargarNiveles();
+				
 				
 				JPanel pTematica = cargarTematicas();
 				
@@ -134,6 +124,41 @@ public class PantallaModoJuego extends JFrame {
 			tematicas.add(rb);
 			p.add(rb);
 			LOG.log(Level.INFO, "Se incluye la tematica " + s);
+		}
+		
+		return p;
+	}
+	
+	private JPanel cargarNiveles()
+	{
+		ArrayList<String> niveles = new ArrayList<>();
+		JPanel p;
+		String nivel;
+		ButtonGroup bg = new ButtonGroup();
+		
+		BufferedReader br = null;
+		try
+		{
+			br = new BufferedReader(new FileReader(FICH_NIVELES));
+			while((nivel = br.readLine()) != null)
+			{
+				niveles.add(nivel);
+			}
+			br.close();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		p = new JPanel(new GridLayout(niveles.size(),1));
+		
+		for(String s : niveles)
+		{
+			JRadioButton rb = new JRadioButton(s);
+			bg.add(rb);
+			p.add(rb);
+			LOG.log(Level.INFO, "Se incluye el nivel " + s);
 		}
 		
 		return p;
