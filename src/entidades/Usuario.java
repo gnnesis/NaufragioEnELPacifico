@@ -1,5 +1,9 @@
 package entidades;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -33,6 +37,23 @@ public class Usuario {
 		String hashedPassword = getMd5(pass);
 		return contrasena.equals(hashedPassword);
 		
+	}
+	
+	public void registrar(String fich)
+	{
+		final String separador = ";";
+		BufferedWriter br;
+		try
+		{
+			br = new BufferedWriter(new FileWriter(fich, true));
+			String cifrada = getMd5(contrasena);
+			br.write("\n" + nickname + separador + cifrada);
+			br.close();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	private String getMd5(String input) {

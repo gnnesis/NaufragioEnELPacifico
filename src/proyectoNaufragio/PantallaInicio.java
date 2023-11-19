@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -33,8 +34,9 @@ public class PantallaInicio extends JFrame {
 	private static Logger LOG = Logger.getLogger(PantallaInicio.class.getName());
 	private JTextField nick;
 	private JPasswordField pass;
+	private static ArrayList<Usuario> usuarios;
 	
-    public PantallaInicio(ArrayList<Usuario> usuarios) {
+    public PantallaInicio() {
         Color cRosa = new Color(255, 102, 196);
         Color cRosaClaro = new Color(255, 128, 234);
 
@@ -96,6 +98,30 @@ public class PantallaInicio extends JFrame {
         s1.add(bEnter);
         sur.add(s1);
         JButton bRegistro = new JButton("REGISTRAR");
+        bRegistro.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String usuario = JOptionPane.showInputDialog(null, "Introduce tu nombre de usuario");
+				String pass = JOptionPane.showInputDialog(null, "Introduce tu contraseña");
+				
+				if(usuario != null & pass != null)
+				{
+					Usuario u = new Usuario (usuario, pass);
+					u.registrar(FICH_USUARIOS);
+					JOptionPane.showMessageDialog(null, "Usuario creado");
+					LOG.log(Level.INFO, "Se ha añadido un nuevo usuario al sistema");
+					usuarios = cargarUsuarios();
+				}
+				else
+				{
+					LOG.log(Level.WARNING, "Intento de registro fallido");
+					JOptionPane.showMessageDialog(null, "Es necesario completar todos los datos");
+				}
+				
+			}
+        	
+        });
         bRegistro.setBackground(cRosa);
         s2.add(bRegistro);
         sur.add(s2);
@@ -129,8 +155,8 @@ public class PantallaInicio extends JFrame {
     }
 
     public static void main(String[] args) {
-    	ArrayList<Usuario> usuarios = cargarUsuarios();
-        new PantallaInicio(usuarios);
+    	usuarios = cargarUsuarios();
+        new PantallaInicio();
     }
     
     private static ArrayList<Usuario> cargarUsuarios()
