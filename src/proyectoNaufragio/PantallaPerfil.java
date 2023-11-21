@@ -17,7 +17,6 @@ import javax.swing.JTextField;
 @SuppressWarnings("serial")
 public class PantallaPerfil extends JFrame {
 
-
 	public PantallaPerfil() {
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
