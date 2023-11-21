@@ -26,7 +26,7 @@ import entidades.Casilla;
 @SuppressWarnings("serial")
 public class PantallaJuego extends JFrame{
 	private int numClicks = 0;
-	private static final String DIR_IMAGENES = "Media/";
+	
 	private final JLabel l1 = new JLabel ("Tiempo");
 	private JLabel l2 = new JLabel ("00:00");
 	private final JLabel l3 = new JLabel ("Clicks totales:");
@@ -67,7 +67,7 @@ public class PantallaJuego extends JFrame{
 		
 		tiempo.start();
 		LOG.log(Level.INFO,"Cronómetro de juego iniciado.");
-		String ruta = DIR_IMAGENES + imagenCasilla;
+		String ruta = Rutas.DIR_IMAGENES + imagenCasilla;
 		ImageIcon fondo = null;
 		try {
 			Image img = ImageIO.read(new File(ruta));

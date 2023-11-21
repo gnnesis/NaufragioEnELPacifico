@@ -9,8 +9,12 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,13 +34,15 @@ import entidades.Usuario;
 @SuppressWarnings("serial")
 public class PantallaInicio extends JFrame {
 	
-	private static final String FICH_USUARIOS = "Data/usuarios.csv";
+	private static String FICH_USUARIOS;
+	private static String logo;
 	private static Logger LOG = Logger.getLogger(PantallaInicio.class.getName());
 	private JTextField nick;
 	private JPasswordField pass;
 	private static ArrayList<Usuario> usuarios;
 	
     public PantallaInicio() {
+    	
         Color cRosa = new Color(255, 102, 196);
         Color cRosaClaro = new Color(255, 128, 234);
 
@@ -54,7 +60,7 @@ public class PantallaInicio extends JFrame {
         JPanel oeste = new JPanel();
 
         JLabel limagen = new JLabel();
-        ImageIcon imagen = new ImageIcon("Media/logoNaufragio.png");
+        ImageIcon imagen = new ImageIcon(logo);
         Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT));
         limagen.setIcon(icono);
 
@@ -155,8 +161,23 @@ public class PantallaInicio extends JFrame {
     }
 
     public static void main(String[] args) {
+    	cargarPropiedades();
     	usuarios = cargarUsuarios();
         new PantallaInicio();
+    }
+    
+    private static void cargarPropiedades()
+    {
+    	try {
+    		Properties p = new Properties();
+			p.load(new FileInputStream(Rutas.FICH_PROPERTIES));
+			FICH_USUARIOS = p.getProperty("usuarios");
+			logo = p.getProperty("logo");
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			LOG.log(Level.WARNING,"No se ha podido cargar el fichero propiedades.");
+		}
+
     }
     
     private static ArrayList<Usuario> cargarUsuarios()

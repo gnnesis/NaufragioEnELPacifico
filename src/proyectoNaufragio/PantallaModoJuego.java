@@ -8,8 +8,10 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,11 +20,12 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class PantallaModoJuego extends JFrame {
 	
-	private static final String FICH_TEMATICAS = "Data/tematica.csv";
-	private static final String FICH_NIVELES = "Data/nivel.csv";
+	private static String FICH_TEMATICAS;
+	private static String FICH_NIVELES;
 	private Logger LOG = Logger.getLogger(PantallaModoJuego.class.getName());
 	
 	public PantallaModoJuego(){
+		cargarPropiedades();
 		Color cRosa = new Color(255,102,196);
 		Font subtitulo = new Font("Arial", Font.BOLD, 18);	
 		
@@ -149,5 +152,19 @@ public class PantallaModoJuego extends JFrame {
 		}
 		
 		return p;
+	}
+	
+	private void cargarPropiedades()
+	{
+		try {
+    		Properties p = new Properties();
+			p.load(new FileInputStream(Rutas.FICH_PROPERTIES));
+			FICH_TEMATICAS = p.getProperty("tematicas");
+			FICH_NIVELES = p.getProperty("niveles");
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			LOG.log(Level.WARNING,"No se ha podido cargar el fichero propiedades.");
+		}
+    	
 	}
 }
