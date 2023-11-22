@@ -112,7 +112,6 @@ public class PantallaJuego extends JFrame{
 							if(boton.isHayBarco())
 							{
 								LOG.log(Level.INFO,"La celda contenia un barco.");
-								boton.setIcon(null);
 								boton.setBackground(Color.red);
 								boolean terminado = juegoTerminado();
 								if (terminado) {
