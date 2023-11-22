@@ -107,10 +107,12 @@ public class PantallaJuego extends JFrame{
 						boton.setEnabled(false);
 						if(!boton.isDestapado())
 						{
+							boton.setIcon(null);
 							boton.setDestapado(true);
 							if(boton.isHayBarco())
 							{
 								LOG.log(Level.INFO,"La celda contenia un barco.");
+								boton.setIcon(null);
 								boton.setBackground(Color.red);
 								boolean terminado = juegoTerminado();
 								if (terminado) {
