@@ -3,8 +3,12 @@ package proyectoNaufragio;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,8 +17,15 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class PantallaPuntuacion extends JFrame {
+	
+	//nuevo
+	private JLabel lTiempo;
+	private JLabel lClicksTotales;
+	private JLabel lAguas;
+	private JLabel lTocados;
+	private JLabel lHundidos;
 
-    public PantallaPuntuacion() {
+    public PantallaPuntuacion(int minutos, int segundos, int numClicks) {
     	Color cRosa= new Color(255,102,196);
         // Básicos
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -28,7 +39,7 @@ public class PantallaPuntuacion extends JFrame {
         JPanel pInferior = new JPanel();
         JPanel pDerecha = new JPanel();
         JPanel pIzquierda = new JPanel();
-        JPanel pCentral = new JPanel();
+        JPanel pCentral = new JPanel(new GridLayout(3,1));
 
         // Ubicar contenedores
         this.add(pSuperior, BorderLayout.NORTH);
@@ -41,10 +52,10 @@ public class PantallaPuntuacion extends JFrame {
         JLabel lTitulo = new JLabel("NAUFRAGIO EN EL PACÍFICO");
         JLabel lResumen = new JLabel("RESUMEN DE LA PARTIDA");
         JButton bJugar= new JButton("VOLVER A JUGAR");
-        bJugar.addActionListener(new ActionListener() {
-        	
+        bJugar.addMouseListener(new MouseAdapter() {
+
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				new PantallaModoJuego();
 	        	dispose();	
 			}
@@ -57,9 +68,17 @@ public class PantallaPuntuacion extends JFrame {
         lResumen.setForeground(cRosa);
         lResumen.setFont(new Font("Open Sans", Font.BOLD, 16));
         
+        
+        //NUEVO
+        lTiempo = new JLabel("Tiempo: " + String.format("%02d:%02d", minutos, segundos));
+        lClicksTotales = new JLabel ("Clicks totales: " + numClicks);
+        
+        
         //4.Añadir componentes a contenedores
         pSuperior.add(lTitulo);
         pCentral.add(lResumen);
+        pCentral.add(lTiempo);
+        pCentral.add(lClicksTotales);
         pInferior.add(bJugar) ;
         
         this.setVisible(true);

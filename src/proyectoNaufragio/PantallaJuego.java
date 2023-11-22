@@ -16,7 +16,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
@@ -115,10 +114,7 @@ public class PantallaJuego extends JFrame{
 								boton.setBackground(Color.red);
 								boolean terminado = juegoTerminado();
 								if (terminado) {
-									JOptionPane.showMessageDialog(null, "Has terminado!");
-									LOG.log(Level.INFO,"Juego finalizado.");
-									new PantallaPuntuacion();
-									dispose();
+									mostrarPuntuacion();
 								}
 							}
 							else
@@ -178,6 +174,16 @@ public class PantallaJuego extends JFrame{
 	private void colocarBarcos() {
 		tablero[0][0].setHayBarco(true);
 		tablero[0][1].setHayBarco(true);
+	}
+	
+	
+	private void mostrarPuntuacion() {
+		int minutosJuego = minutos;
+		int segundosJuego = segundos;
+		int clicksTotales = numClicks;
+		
+		new PantallaPuntuacion(minutosJuego, segundosJuego, clicksTotales);
+		dispose();
 	}
 	
 }

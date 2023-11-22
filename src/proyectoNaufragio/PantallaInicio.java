@@ -89,6 +89,7 @@ public class PantallaInicio extends JFrame {
             				
             				LOG.log(Level.INFO, "Inicio de sesion correcto");
             				new PantallaModoJuego();
+            				System.out.println("Me ejecuto");
                             dispose();
             			}
             			else
@@ -111,7 +112,7 @@ public class PantallaInicio extends JFrame {
 				String usuario = JOptionPane.showInputDialog(null, "Introduce tu nombre de usuario");
 				String pass = JOptionPane.showInputDialog(null, "Introduce tu contraseña");
 				
-				if(usuario != null & pass != null)
+				if(usuario != null & pass != null )
 				{
 					Usuario u = new Usuario (usuario, pass);
 					u.registrar(FICH_USUARIOS);
