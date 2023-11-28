@@ -4,13 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,7 +18,6 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class PantallaPuntuacion extends JFrame {
 	
-	//nuevo
 	private JLabel lTiempo;
 	private JLabel lClicksTotales;
 	private JLabel lAguas;
@@ -27,6 +25,9 @@ public class PantallaPuntuacion extends JFrame {
 	private JLabel lHundidos;
 
     public PantallaPuntuacion(int minutos, int segundos, int numClicks) {
+    	
+    	Image iconImage = new ImageIcon("Media/TocadoHalloween.png").getImage();
+        setIconImage(iconImage);
     	Color cRosa= new Color(255,102,196);
        
     	// Básicos
@@ -95,13 +96,11 @@ public class PantallaPuntuacion extends JFrame {
         bJugar.setFont(new Font("Consolas", Font.BOLD, 12));
         lTitulo.setForeground(cRosa);
         lResumen.setForeground(cRosa);
-        lResumen.setFont(new Font("Open Sans", Font.BOLD, 16));
-        
+        lResumen.setFont(new Font("Open Sans", Font.BOLD, 16));        
         
         //NUEVO
         lTiempo = new JLabel("Tiempo: " + String.format("%02d:%02d", minutos, segundos));
-        lClicksTotales = new JLabel ("Clicks totales: " + numClicks);
-        
+        lClicksTotales = new JLabel ("Clicks totales: " + numClicks);      
         
         //4.Añadir componentes a contenedores
         pSuperior.add(lTitulo);
