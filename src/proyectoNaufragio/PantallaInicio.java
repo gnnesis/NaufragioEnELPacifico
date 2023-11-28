@@ -10,14 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -42,6 +39,9 @@ public class PantallaInicio extends JFrame {
 	private static ArrayList<Usuario> usuarios;
 	
     public PantallaInicio() {
+    	
+    	Image iconImage = new ImageIcon("Media/TocadoHalloween.png").getImage();
+        setIconImage(iconImage);
     	
         Color cRosa = new Color(255, 102, 196);
         Color cRosaClaro = new Color(255, 128, 234);
@@ -141,7 +141,7 @@ public class PantallaInicio extends JFrame {
         inicio.setHorizontalAlignment(SwingConstants.CENTER);
         inicio.setFont(new Font("Arial", Font.BOLD, 18));
         centro.add(inicio);
-        nick = new JTextField("Introduce tu nick");
+        nick = new JTextField("Nickname");
         nick.setSize(new Dimension(50, 50));
         nick.setBackground(cRosaClaro);
         nick.setColumns(30);
@@ -178,7 +178,6 @@ public class PantallaInicio extends JFrame {
 			e1.printStackTrace();
 			LOG.log(Level.WARNING,"No se ha podido cargar el fichero propiedades.");
 		}
-
     }
     
     private static ArrayList<Usuario> cargarUsuarios()
@@ -204,7 +203,6 @@ public class PantallaInicio extends JFrame {
 		{
 			e.printStackTrace();
 		}
-    	
     	return usuarios;
     }
 }

@@ -43,6 +43,9 @@ public class PantallaJuego extends JFrame{
 
 	
 	public PantallaJuego(String imagenCasilla){
+		
+		Image iconImage = new ImageIcon("Media/TocadoHalloween.png").getImage();
+        setIconImage(iconImage);
 		this.setTitle("Naufragio en el Pacífico");
 		this.setSize(new Dimension(600,600));
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -88,7 +91,6 @@ public class PantallaJuego extends JFrame{
 		JLabel titulo = new JLabel("Naufragio en el Pacífico");
 		pantNorte.add(titulo);
 		
-		
 		//CENTRO
 		
 		tablero = new Casilla[9][9];
@@ -125,10 +127,8 @@ public class PantallaJuego extends JFrame{
 						}
 						
 					}
-					
 				});
 				pantCentro.add(boton);
-				
 			}
 		}
 		colocarBarcos();
@@ -166,7 +166,6 @@ public class PantallaJuego extends JFrame{
 				if (tablero[i][j].isHayBarco()&& !tablero[i][j].isDestapado()) {
 					fin = false;
 				}
-				
 			}
 		}
 		return fin;
@@ -177,7 +176,6 @@ public class PantallaJuego extends JFrame{
 		tablero[0][1].setHayBarco(true);
 	}
 	
-	
 	private void mostrarPuntuacion() {
 		int minutosJuego = minutos;
 		int segundosJuego = segundos;
@@ -186,5 +184,4 @@ public class PantallaJuego extends JFrame{
 		new PantallaPuntuacion(minutosJuego, segundosJuego, clicksTotales);
 		dispose();
 	}
-	
 }

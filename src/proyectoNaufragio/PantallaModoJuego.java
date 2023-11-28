@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -25,6 +26,10 @@ public class PantallaModoJuego extends JFrame {
 	private Logger LOG = Logger.getLogger(PantallaModoJuego.class.getName());
 	
 	public PantallaModoJuego(){
+		
+		Image iconImage = new ImageIcon("Media/TocadoHalloween.png").getImage();
+        setIconImage(iconImage);
+        
 		cargarPropiedades();
 		Color cRosa = new Color(255,102,196);
 		Font subtitulo = new Font("Arial", Font.BOLD, 18);	
@@ -150,7 +155,6 @@ public class PantallaModoJuego extends JFrame {
 			p.add(rb);
 			LOG.log(Level.INFO, "Se incluye el nivel " + s);
 		}
-		
 		return p;
 	}
 	
@@ -164,7 +168,6 @@ public class PantallaModoJuego extends JFrame {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 			LOG.log(Level.WARNING,"No se ha podido cargar el fichero propiedades.");
-		}
-    	
+		}	
 	}
 }

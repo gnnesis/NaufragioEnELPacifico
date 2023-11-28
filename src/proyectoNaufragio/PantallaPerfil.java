@@ -23,6 +23,9 @@ public class PantallaPerfil extends JFrame {
 
 	public PantallaPerfil( ) {
 		
+		Image iconImage = new ImageIcon("Media/TocadoHalloween.png").getImage();
+        setIconImage(iconImage);
+		
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(600, 450);
@@ -68,11 +71,9 @@ public class PantallaPerfil extends JFrame {
         JLabel tiempoTotal = new JLabel("Tiempo total jugado: 63672 hrs");
         tiempoTotal.setBackground(Rosita);
         pantCentro.add(tiempoTotal);
-
         
         // OESTE
         pantOeste.setLayout(new GridLayout(1,1));
-        
         String rutaFPerfil = "Media/TocadoHalloween.png"; 
         JLabel fPerfil=new JLabel();
         ImageIcon perfil = new ImageIcon(rutaFPerfil);
@@ -120,8 +121,7 @@ public class PantallaPerfil extends JFrame {
         PEstadis.setIcon(IEstadis);
         filler2.add(PEstadis);
         pantSur.add(filler2);
-        
-        
+                
         JButton bJugar = new JButton("Modo Juego");
         bJugar.setBackground(Rosita);
         bJugar.addActionListener(new ActionListener() {
