@@ -20,9 +20,7 @@ public class PantallaPuntuacion extends JFrame {
 	
 	private JLabel lTiempo;
 	private JLabel lClicksTotales;
-	private JLabel lAguas;
-	private JLabel lTocados;
-	private JLabel lHundidos;
+	
 
     public PantallaPuntuacion(int minutos, int segundos, int numClicks) {
     	
@@ -65,7 +63,7 @@ public class PantallaPuntuacion extends JFrame {
         lResumen.setFont(new Font("Open Sans", Font.BOLD, 20));
 
         bJugar.setBackground(cRosa);
-        bJugar.setForeground(Color.WHITE);
+        bJugar.setForeground(Color.MAGENTA);
         bJugar.setFont(new Font("Consolas", Font.BOLD, 16));
       
         bJugar.addMouseListener(new MouseAdapter() {
@@ -81,7 +79,7 @@ public class PantallaPuntuacion extends JFrame {
         
        
         bVerRanking.setBackground(cRosa);
-        bVerRanking.setForeground(Color.WHITE);
+        bVerRanking.setForeground(Color.MAGENTA);
         bVerRanking.setFont(new Font("Consolas", Font.BOLD, 12));
         bVerRanking.addMouseListener(new MouseAdapter() {
         	@Override

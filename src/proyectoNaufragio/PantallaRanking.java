@@ -21,7 +21,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import entidades.Partida;
-import entidades.Usuario;
 
 @SuppressWarnings("serial")
 public class PantallaRanking extends JFrame {
