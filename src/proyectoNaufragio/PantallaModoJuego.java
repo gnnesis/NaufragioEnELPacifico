@@ -27,7 +27,7 @@ public class PantallaModoJuego extends JFrame {
 	
 	public PantallaModoJuego(){
 		
-		Image iconImage = new ImageIcon("Media/TocadoHalloween.png").getImage();
+		Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
         setIconImage(iconImage);
         
 		cargarPropiedades();

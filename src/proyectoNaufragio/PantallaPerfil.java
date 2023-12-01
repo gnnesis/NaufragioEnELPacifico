@@ -23,7 +23,7 @@ public class PantallaPerfil extends JFrame {
 
 	public PantallaPerfil( ) {
 		
-		Image iconImage = new ImageIcon("Media/TocadoHalloween.png").getImage();
+		Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
         setIconImage(iconImage);
 		
         this.setVisible(true);

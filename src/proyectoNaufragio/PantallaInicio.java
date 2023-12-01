@@ -40,7 +40,7 @@ public class PantallaInicio extends JFrame {
 	
     public PantallaInicio() {
     	
-    	Image iconImage = new ImageIcon("Media/TocadoHalloween.png").getImage();
+    	Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
         setIconImage(iconImage);
     	
         Color cRosa = new Color(255, 102, 196);

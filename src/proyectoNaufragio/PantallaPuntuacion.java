@@ -25,7 +25,7 @@ public class PantallaPuntuacion extends JFrame {
 
     public PantallaPuntuacion(int minutos, int segundos, int numClicks) {
     	
-    	Image iconImage = new ImageIcon("Media/TocadoHalloween.png").getImage();
+    	Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
         setIconImage(iconImage);
     	Color cRosa= new Color(255,102,196);
         // Básicos

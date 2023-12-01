@@ -44,7 +44,7 @@ public class PantallaJuego extends JFrame{
 	
 	public PantallaJuego(String imagenCasilla){
 		
-		Image iconImage = new ImageIcon("Media/TocadoHalloween.png").getImage();
+		Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
         setIconImage(iconImage);
 		this.setTitle("Naufragio en el Pacífico");
 		this.setSize(new Dimension(600,600));
