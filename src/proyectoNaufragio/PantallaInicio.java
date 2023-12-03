@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,6 +28,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import entidades.Usuario;
+import excepciones.UsuarioIncorrectoException;
 
 @SuppressWarnings("serial")
 public class PantallaInicio extends JFrame {
@@ -77,24 +79,29 @@ public class PantallaInicio extends JFrame {
             public void actionPerformed(ActionEvent e) {
             	String username = nick.getText();
             	String password = String.valueOf(pass.getPassword());
-            	
-            	for(Usuario u : usuarios)
+            	try
             	{
-            		if(u.getNickname().equals(username))
-            		{
-            			LOG.log(Level.INFO, "Usuario encontrado");
-            			System.out.println(password);
-            			if(u.comprobarContrasena(password))
-            			{
-            				LOG.log(Level.INFO, "Inicio de sesion correcto");
-            				new PantallaModoJuego();
-                            dispose();
-            			}
-            			else
-            			{
-            				LOG.log(Level.WARNING, "Contraseña introducida incorrecta");
-            			}
-            		}
+            		for(Usuario u : usuarios)
+                	{
+                		if(u.getNickname().equals(username))
+                		{
+                			LOG.log(Level.INFO, "Usuario encontrado");
+                			if(u.comprobarContrasena(password))
+                			{
+                				LOG.log(Level.INFO, "Inicio de sesion correcto");
+                				new PantallaModoJuego();
+                                dispose();
+                			}
+                			else
+                			{
+                				throw new UsuarioIncorrectoException();
+                			}
+                		}
+                	}
+            	}
+            	catch(UsuarioIncorrectoException ex){
+            		LOG.log(Level.WARNING, ex.getMessage());
+            		JOptionPane.showMessageDialog(null, ex.getMessage());
             	}
             	
                 
