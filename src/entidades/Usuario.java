@@ -34,7 +34,6 @@ public class Usuario {
 	public boolean comprobarContrasena(String pass) {
 		String hashedPassword = getMd5(pass);
 		return contrasena.equals(hashedPassword);
-		
 	}
 	
 	public void registrar(String fich)

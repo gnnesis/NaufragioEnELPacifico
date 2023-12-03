@@ -13,7 +13,7 @@ class BarcoTest {
 	private static final int NUM_BARCOS = 5;
 
 	@BeforeAll
-	void init() {
+	static void init() {
 		barco = new Barco(NUM_BARCOS);
 		assert(barco != null);
 	}
