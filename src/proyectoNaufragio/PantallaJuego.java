@@ -1,5 +1,7 @@
 package proyectoNaufragio;
 
+//NUESTRO
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,11 +19,14 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
 
+import entidades.Barco;
 import entidades.Casilla;
+import entidades.Nivel;
 
 @SuppressWarnings("serial")
 public class PantallaJuego extends JFrame{
@@ -38,17 +44,20 @@ public class PantallaJuego extends JFrame{
 	private  JLabel l10 = new JLabel ("0");
 	private int minutos = 0;
 	private int segundos = 0;
+	private int aguas = 0;
+	private int tocados = 0;
 	private Casilla[][] tablero;
 	private Logger LOG = Logger.getLogger(PantallaJuego.class.getName());
-
+	private Nivel nivel;
+	private Random random = new Random(System.currentTimeMillis());
 	
-	public PantallaJuego(String imagenCasilla){
-		
-		Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
-        setIconImage(iconImage);
+	public PantallaJuego(String imagenCasilla, Nivel nivel){
+		this.nivel = nivel;
 		this.setTitle("Naufragio en el Pacífico");
 		this.setSize(new Dimension(600,600));
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
+        setIconImage(iconImage);
 		this.setLayout(new BorderLayout());
 		Timer tiempo = new Timer(1000, new ActionListener() {
 
@@ -64,7 +73,6 @@ public class PantallaJuego extends JFrame{
 				
 				l2.setText(String.format("%02d:%02d", minutos, segundos));
 			}
-			
 		});
 		
 		tiempo.start();
@@ -78,11 +86,10 @@ public class PantallaJuego extends JFrame{
 			LOG.log(Level.SEVERE,"Ha ocurrido un error cargando el icono de la celda.");
 		}
 		
-		
 		JPanel pantNorte = new JPanel();
 		JPanel pantSur = new JPanel();
 		JPanel pantCentro = new JPanel();
-		pantCentro.setLayout(new GridLayout(9,9));
+		pantCentro.setLayout(new GridLayout(nivel.getColumnas(),nivel.getFilas()));
 		JPanel pantEste = new JPanel();
 		JPanel pantOeste = new JPanel();
 		pantOeste.setLayout(new GridLayout(5,2));
@@ -92,10 +99,9 @@ public class PantallaJuego extends JFrame{
 		pantNorte.add(titulo);
 		
 		//CENTRO
-		
-		tablero = new Casilla[9][9];
-		for (int i=0; i<9;i++) {
-			for (int j=0; j<9;j++) {
+		tablero = new Casilla[nivel.getColumnas()][nivel.getFilas()];
+		for (int i=0; i<nivel.getColumnas();i++) {
+			for (int j=0; j<nivel.getFilas();j++) {
 				Casilla boton = new Casilla();
 				boton.setIcon(fondo);
 				tablero[i][j] = boton;
@@ -106,15 +112,22 @@ public class PantallaJuego extends JFrame{
 						numClicks++;
 						l4.setText(String.valueOf(numClicks));
 						
-						boton.setEnabled(false);
+						boton.setFocusable(false);
 						if(!boton.isDestapado())
 						{
 							boton.setIcon(null);
 							boton.setDestapado(true);
 							if(boton.isHayBarco())
 							{
+								tocados++;
+								l8.setText("" + tocados);
+								try {
+									boton.setIcon(new ImageIcon(ImageIO.read(new File(Rutas.DIR_IMAGENES + "TocadoClasico.png"))));
+								} catch (IOException e1) {
+									e1.printStackTrace();
+								}
 								LOG.log(Level.INFO,"La celda contenia un barco.");
-								boton.setBackground(Color.red);
+								//boton.setBackground(Color.red);
 								boolean terminado = juegoTerminado();
 								if (terminado) {
 									mostrarPuntuacion();
@@ -122,6 +135,8 @@ public class PantallaJuego extends JFrame{
 							}
 							else
 							{
+								aguas++;
+								l6.setText(""+aguas);
 								boton.setBackground(Color.blue);
 							}
 						}
@@ -138,7 +153,6 @@ public class PantallaJuego extends JFrame{
 		pantEste.add(barcos);
 		
 		//OESTE
-		
 		pantOeste.add(l1);
 		pantOeste.add(l2);
 		pantOeste.add(l3);
@@ -161,8 +175,8 @@ public class PantallaJuego extends JFrame{
 	private boolean juegoTerminado() {
 		boolean fin = true;
 		//cada vez que se destape la casilla hay que comprobar si el juego ha terminado.
-		for (int i=0; i<9;i++) {
-			for (int j=0; j<9;j++) {
+		for (int i=0; i<nivel.getColumnas();i++) {
+			for (int j=0; j<nivel.getFilas();j++) {
 				if (tablero[i][j].isHayBarco()&& !tablero[i][j].isDestapado()) {
 					fin = false;
 				}
@@ -172,15 +186,68 @@ public class PantallaJuego extends JFrame{
 	}
 	
 	private void colocarBarcos() {
-		tablero[0][0].setHayBarco(true);
-		tablero[0][1].setHayBarco(true);
+		Barco[] barcos = nivel.getBarcos();
+		int i = Integer.MIN_VALUE;
+		int j = i;
+		
+		boolean vertical;
+		
+		for(Barco b : barcos)
+		{
+			vertical = random.nextBoolean();
+			int celdas = b.getNumCeldas();
+			encontrarPosiciones(i,j,vertical,celdas);
+		}
+	}
+	
+	private void encontrarPosiciones(int i, int j, boolean vertical, final int celdas) {
+	    int limite;
+	    if (vertical) {
+	        limite = nivel.getColumnas() - celdas;
+	    } else {
+	        limite = nivel.getFilas() - celdas;
+	    }
+
+	    do {
+	        i = random.nextInt(nivel.getColumnas());
+	        j = random.nextInt(nivel.getFilas());
+	    } while ((i > limite && vertical) || (j > limite && !vertical) || !posicionDisponible(i, j, vertical, celdas));
+
+	    colocarBarco(i, j, vertical, celdas);
+	    LOG.log(Level.INFO, "Se coloca el barco en la posicion ["+i+"]["+j+"] "+ vertical);
+	}
+
+	private boolean posicionDisponible(int i, int j, boolean vertical, int celdas) {
+	    for (int k = 0; k < celdas; k++) {
+	        if (vertical) {
+	            if (tablero[i + k][j].isHayBarco()) {
+	                return false;
+	            }
+	        } else {
+	            if (tablero[i][j + k].isHayBarco()) {
+	                return false;
+	            }
+	        }
+	    }
+	    return true;
+	}
+
+	private void colocarBarco(int i, int j, boolean vertical, int celdas) {
+	    for (int k = 0; k < celdas; k++) {
+	        if (vertical) {
+	            tablero[i + k][j].setHayBarco(true);
+	        } else {
+	            tablero[i][j + k].setHayBarco(true);
+	        }
+	    }
 	}
 	
 	private void mostrarPuntuacion() {
 		int minutosJuego = minutos;
 		int segundosJuego = segundos;
 		int clicksTotales = numClicks;
-		
+		JOptionPane.showMessageDialog(null, "Enhorabuena, has solucionado el tablero");
+		LOG.log(Level.INFO, "Tablero finalizado");
 		new PantallaPuntuacion(minutosJuego, segundosJuego, clicksTotales);
 		dispose();
 	}

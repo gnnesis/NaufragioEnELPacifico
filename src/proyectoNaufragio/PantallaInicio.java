@@ -86,10 +86,8 @@ public class PantallaInicio extends JFrame {
             			System.out.println(password);
             			if(u.comprobarContrasena(password))
             			{
-            				
             				LOG.log(Level.INFO, "Inicio de sesion correcto");
             				new PantallaModoJuego();
-            				System.out.println("Me ejecuto");
                             dispose();
             			}
             			else

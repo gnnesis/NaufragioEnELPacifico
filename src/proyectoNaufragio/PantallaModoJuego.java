@@ -1,5 +1,7 @@
 package proyectoNaufragio;
 
+//NUESTRO
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,24 +20,30 @@ import java.util.logging.Logger;
 
 import javax.swing.*;
 
+import entidades.Barco;
+import entidades.Nivel;
+
 @SuppressWarnings("serial")
 public class PantallaModoJuego extends JFrame {
 	
 	private static String FICH_TEMATICAS;
 	private static String FICH_NIVELES;
+	private static ArrayList<Nivel> niveles;
+	private static ArrayList<JRadioButton> rTematicas = new ArrayList<>();
+	private static ArrayList<JRadioButton> rNiveles = new ArrayList<>();
+
 	private Logger LOG = Logger.getLogger(PantallaModoJuego.class.getName());
 	
 	public PantallaModoJuego(){
 		
-		Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
-        setIconImage(iconImage);
-        
 		cargarPropiedades();
 		Color cRosa = new Color(255,102,196);
 		Font subtitulo = new Font("Arial", Font.BOLD, 18);	
 		
 		this.setSize(new Dimension(400,400));
 		this.setTitle("Naufragio en el Pacífico");
+		Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
+        setIconImage(iconImage);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		
@@ -58,8 +66,29 @@ public class PantallaModoJuego extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String tematica = "Clasico";
-				new PantallaJuego(tematica + ".png");
+				String tematica = "";
+				Nivel n = null;
+				String nivel = "";
+				
+				for(JRadioButton r : rNiveles)
+				{
+					if(r.isSelected())
+						nivel = r.getText();
+				}
+				
+				for(JRadioButton r : rTematicas)
+				{
+					if(r.isSelected())
+						tematica = r.getText();
+				}
+				
+				for(Nivel ni : niveles)
+				{
+					if(ni.getNombre().equals(nivel))
+						n = ni;
+				}
+				
+				new PantallaJuego(tematica + ".png", n);
 				dispose();
 			}
 		});
@@ -117,6 +146,7 @@ public class PantallaModoJuego extends JFrame {
 		{
 			JRadioButton rb = new JRadioButton(s);
 			tematicas.add(rb);
+			rTematicas.add(rb);
 			p.add(rb);
 			LOG.log(Level.INFO, "Se incluye la tematica " + s);
 		}
@@ -126,10 +156,12 @@ public class PantallaModoJuego extends JFrame {
 	
 	private JPanel cargarNiveles()
 	{
-		ArrayList<String> niveles = new ArrayList<>();
+		niveles = new ArrayList<>();
 		JPanel p;
+		Barco b;
 		String nivel;
 		ButtonGroup bg = new ButtonGroup();
+		final String separador = ";";
 		
 		BufferedReader br = null;
 		try
@@ -137,7 +169,16 @@ public class PantallaModoJuego extends JFrame {
 			br = new BufferedReader(new FileReader(FICH_NIVELES));
 			while((nivel = br.readLine()) != null)
 			{
-				niveles.add(nivel);
+				String[] params = nivel.split(separador);
+				int numBarcos = Integer.parseInt(params[3]);
+				Nivel n = new Nivel(params[0], Integer.parseInt(params[1]), Integer.parseInt(params[2]), numBarcos);
+				for(int i = 4; i < 4 + numBarcos; i++)
+				{
+					b = new Barco(Integer.parseInt(params[i]));
+					n.anadirBarco(b);
+					LOG.log(Level.INFO, "Se añade un barco para el nivel " + n.getNombre());
+				}
+				niveles.add(n);
 			}
 			br.close();
 		}
@@ -148,12 +189,13 @@ public class PantallaModoJuego extends JFrame {
 		
 		p = new JPanel(new GridLayout(niveles.size(),1));
 		
-		for(String s : niveles)
+		for(Nivel n : niveles)
 		{
-			JRadioButton rb = new JRadioButton(s);
+			JRadioButton rb = new JRadioButton(n.getNombre());
 			bg.add(rb);
+			rNiveles.add(rb);
 			p.add(rb);
-			LOG.log(Level.INFO, "Se incluye el nivel " + s);
+			LOG.log(Level.INFO, "Se incluye el nivel " + n.getNombre());
 		}
 		return p;
 	}

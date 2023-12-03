@@ -41,8 +41,5 @@ public class Partida {
 	public void setClicks(int clicks) {
 		this.clicks = clicks;
 	}
-
-	
-	
 	
 }
