@@ -62,9 +62,7 @@ public class PantallaPuntuacion extends JFrame {
         lResumen.setForeground(cRosa);
         lResumen.setFont(new Font("Open Sans", Font.BOLD, 20));
 
-        bJugar.setBackground(cRosa);
-        bJugar.setForeground(Color.MAGENTA);
-        bJugar.setFont(new Font("Consolas", Font.BOLD, 16));
+       
       
         bJugar.addMouseListener(new MouseAdapter() {
 
@@ -78,9 +76,7 @@ public class PantallaPuntuacion extends JFrame {
         //2.5 Crear botón ranking
         
        
-        bVerRanking.setBackground(cRosa);
-        bVerRanking.setForeground(Color.MAGENTA);
-        bVerRanking.setFont(new Font("Consolas", Font.BOLD, 12));
+      
         bVerRanking.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
@@ -91,7 +87,7 @@ public class PantallaPuntuacion extends JFrame {
         
         //3.Diseño de componentes
         bJugar.setBackground(cRosa);
-        bJugar.setFont(new Font("Consolas", Font.BOLD, 12));
+       
         lTitulo.setForeground(cRosa);
         lResumen.setForeground(cRosa);
         lResumen.setFont(new Font("Open Sans", Font.BOLD, 16));        
