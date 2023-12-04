@@ -20,7 +20,6 @@ public class PantallaPuntuacion extends JFrame {
 	
 	private JLabel lTiempo;
 	private JLabel lClicksTotales;
-	private String ainhoa;
 	
     public PantallaPuntuacion(int minutos, int segundos, int numClicks) {
     	
