@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -16,6 +17,9 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -39,12 +43,20 @@ public class PantallaInicio extends JFrame {
 	private JTextField nick;
 	private JPasswordField pass;
 	private static ArrayList<Usuario> usuarios;
+
+	// Necesario ser publico para gestionarlo entre ventanas
+	public static Clip clip;
+	
+	private AudioInputStream audioInputStream;
+	private static final String filePath = "Media/Musica.wav";
 	
     public PantallaInicio() {
     	
     	Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
         setIconImage(iconImage);
     	
+        inicializarAudio();
+        
         Color cRosa = new Color(255, 102, 196);
         Color cRosaClaro = new Color(255, 128, 234);
 
@@ -164,13 +176,32 @@ public class PantallaInicio extends JFrame {
         this.add(este, BorderLayout.EAST);
         this.add(oeste, BorderLayout.WEST);
         this.setVisible(true);
+    	
+    }
+    
+    private void inicializarAudio()  {
+    	
+    	try
+    	{
+    		audioInputStream = AudioSystem.getAudioInputStream(new File (filePath).getAbsoluteFile());
+        	
+        	clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+    	}
+    	catch(Exception e)
+    	{
+    		e.printStackTrace();
+    	}   	
+    	
     }
 
     public static void main(String[] args) {
     	cargarPropiedades();
     	usuarios = cargarUsuarios();
-        new PantallaInicio();
+    	new PantallaInicio();
     }
+    
     
     private static void cargarPropiedades()
     {
@@ -210,4 +241,6 @@ public class PantallaInicio extends JFrame {
 		}
     	return usuarios;
     }
+    
+    
 }
