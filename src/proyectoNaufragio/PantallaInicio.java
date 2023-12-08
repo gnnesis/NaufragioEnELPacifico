@@ -37,6 +37,7 @@ import excepciones.UsuarioIncorrectoException;
 @SuppressWarnings("serial")
 public class PantallaInicio extends JFrame {
 	
+	
 	private static String FICH_USUARIOS;
 	private static String logo;
 	private static Logger LOG = Logger.getLogger(PantallaInicio.class.getName());
@@ -101,8 +102,11 @@ public class PantallaInicio extends JFrame {
                 			if(u.comprobarContrasena(password))
                 			{
                 				LOG.log(Level.INFO, "Inicio de sesion correcto");
-                				new PantallaModoJuego();
-                                dispose();
+                				
+                				
+                				new PantallaModoJuego(clip);
+                               
+                				dispose();
                 			}
                 			else
                 			{

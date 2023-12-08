@@ -246,7 +246,7 @@ public class PantallaJuego extends JFrame{
 		int clicksTotales = numClicks;
 		JOptionPane.showMessageDialog(null, "Enhorabuena, has solucionado el tablero");
 		LOG.log(Level.INFO, "Tablero finalizado");
-		new PantallaPuntuacion(minutosJuego, segundosJuego, clicksTotales);
+		new PantallaPuntuacion(minutosJuego, segundosJuego, clicksTotales, null);
 		dispose();
 	}
 }

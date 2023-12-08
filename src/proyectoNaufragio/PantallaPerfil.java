@@ -9,7 +9,13 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,7 +27,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class PantallaPerfil extends JFrame {
 
-	public PantallaPerfil( ) {
+	public PantallaPerfil(Clip clip) {
 		
 		Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
         setIconImage(iconImage);
@@ -127,7 +133,7 @@ public class PantallaPerfil extends JFrame {
         bJugar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new PantallaModoJuego();
+                new PantallaModoJuego(clip);
                 dispose();
             }
         });
@@ -143,7 +149,24 @@ public class PantallaPerfil extends JFrame {
         this.setVisible(true);
         
     }
+	
+	 private static Clip obtenerClip() {
+	    	try {
+	    		Clip clip = AudioSystem.getClip();
+	    		AudioInputStream inputStream = AudioSystem.getAudioInputStream(PantallaPuntuacion.class.getResourceAsStream("Musica.wav"));
+	    		
+	    	clip.open(inputStream);
+	    	return clip;
+	    	
+	    	} catch (Exception e) {
+	    		e.printStackTrace();
+	    		return null;
+	    	}
+	    }
+	    
+
 	 public static void main(String[] args) {
-	        new PantallaPerfil();
+		 Clip clip = obtenerClip();
+		 new PantallaPerfil(clip);
 	    }
 }

@@ -8,6 +8,9 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,8 +24,10 @@ public class PantallaPuntuacion extends JFrame {
 	private JLabel lTiempo;
 	private JLabel lClicksTotales;
 	
-    public PantallaPuntuacion(int minutos, int segundos, int numClicks) {
+    public PantallaPuntuacion(int minutos, int segundos, int numClicks, Clip clip) {
     	
+    	Clip clip1 = obtenerClip();
+    	inicializarVentana(minutos, segundos, numClicks, clip1);
     	Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
         setIconImage(iconImage);
     	Color cRosa= new Color(255,102,196);
@@ -67,7 +72,7 @@ public class PantallaPuntuacion extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new PantallaModoJuego();
+				new PantallaModoJuego(clip1);
 	        	dispose();	
 			}
         });
@@ -112,13 +117,41 @@ public class PantallaPuntuacion extends JFrame {
     }
     
     
-    private void verRanking() {
+    private void inicializarVentana(int minutos, int segundos, int numClicks, Clip clip1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	private void verRanking() {
     	new PantallaRanking();
     	
     }
     
+    private static Clip obtenerClip() {
+    	try {
+    		Clip clip = AudioSystem.getClip();
+    		AudioInputStream inputStream = AudioSystem.getAudioInputStream(PantallaPuntuacion.class.getResourceAsStream("Musica.wav"));
+    		
+    	clip.open(inputStream);
+    	return clip;
+    	
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		return null;
+    	}
+    }
+    
+    
     public static void main(String[] args) {
+    	Clip clip = null;
+		try {
+			clip = obtenerClip();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	//Esto es para un ejemplo de uso
-    	new PantallaPuntuacion(2,30,50);
+    	new PantallaPuntuacion(2,30,50, clip);
     }
 }
