@@ -7,10 +7,6 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,10 +20,8 @@ public class PantallaPuntuacion extends JFrame {
 	private JLabel lTiempo;
 	private JLabel lClicksTotales;
 	
-    public PantallaPuntuacion(int minutos, int segundos, int numClicks, Clip clip) {
-    	
-    	Clip clip1 = obtenerClip();
-    	inicializarVentana(minutos, segundos, numClicks, clip1);
+    public PantallaPuntuacion(int minutos, int segundos, int numClicks) {
+ 
     	Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
         setIconImage(iconImage);
     	Color cRosa= new Color(255,102,196);
@@ -66,20 +60,16 @@ public class PantallaPuntuacion extends JFrame {
         lResumen.setForeground(cRosa);
         lResumen.setFont(new Font("Open Sans", Font.BOLD, 20));
 
-       
-      
         bJugar.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new PantallaModoJuego(clip1);
+				new PantallaModoJuego();
 	        	dispose();	
 			}
         });
         
         //2.5 Crear botón ranking
-        
-       
       
         bVerRanking.addMouseListener(new MouseAdapter() {
         	@Override
@@ -115,43 +105,13 @@ public class PantallaPuntuacion extends JFrame {
         
         this.setVisible(true);
     }
-    
-    
-    private void inicializarVentana(int minutos, int segundos, int numClicks, Clip clip1) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 	private void verRanking() {
     	new PantallaRanking();
     	
     }
     
-    private static Clip obtenerClip() {
-    	try {
-    		Clip clip = AudioSystem.getClip();
-    		AudioInputStream inputStream = AudioSystem.getAudioInputStream(PantallaPuntuacion.class.getResourceAsStream("Musica.wav"));
-    		
-    	clip.open(inputStream);
-    	return clip;
-    	
-    	} catch (Exception e) {
-    		e.printStackTrace();
-    		return null;
-    	}
-    }
-    
-    
     public static void main(String[] args) {
-    	Clip clip = null;
-		try {
-			clip = obtenerClip();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	//Esto es para un ejemplo de uso
-    	new PantallaPuntuacion(2,30,50, clip);
+    	new PantallaPuntuacion(2,30,50);
     }
 }

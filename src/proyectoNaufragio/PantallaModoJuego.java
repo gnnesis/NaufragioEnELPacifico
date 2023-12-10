@@ -28,22 +28,21 @@ import entidades.Nivel;
 @SuppressWarnings("serial")
 public class PantallaModoJuego extends JFrame {
 	
-	private Clip clip;
 	private static String FICH_TEMATICAS;
 	private static String FICH_NIVELES;
 	private static ArrayList<Nivel> niveles;
 	private static ArrayList<JRadioButton> rTematicas = new ArrayList<>();
 	private static ArrayList<JRadioButton> rNiveles = new ArrayList<>();
+	private Clip clip = PantallaInicio.clip;
 
 	private Logger LOG = Logger.getLogger(PantallaModoJuego.class.getName());
 	
-	public PantallaModoJuego(Clip clip) {
+	public PantallaModoJuego() {
 		
 		cargarPropiedades();
 		Color cRosa = new Color(255,102,196);
 		Font subtitulo = new Font("Arial", Font.BOLD, 18);	
-		
-		this.clip = clip;
+
 		this.setSize(new Dimension(400,400));
 		this.setTitle("Naufragio en el Pacífico");
 		Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
@@ -68,8 +67,7 @@ public class PantallaModoJuego extends JFrame {
     		
     	});
     	
-    	
-    	JMenuItem mute = new JMenuItem("Mute");
+    	JMenuItem mute = new JMenuItem("Pause/Play");
     	mute.addActionListener(new ActionListener() {
 
 			@Override
@@ -79,23 +77,21 @@ public class PantallaModoJuego extends JFrame {
 				} else {
 					clip.start();
 				}
-				
 			}
-    		
     	});
     	
     	musica.add(volumen);
-    	musica.add(mute)
-;
+    	musica.add(mute);
+    	
     	JMenuItem salir = new JMenuItem("Salir");
     	salir.addActionListener(new ActionListener() {
     		
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				
 			}
     	});
+    	
     	archivo.add(salir);
     	menu.add(archivo);
     	menu.add(musica);
