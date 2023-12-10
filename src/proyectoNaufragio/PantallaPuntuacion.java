@@ -7,7 +7,6 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,7 +21,7 @@ public class PantallaPuntuacion extends JFrame {
 	private JLabel lClicksTotales;
 	
     public PantallaPuntuacion(int minutos, int segundos, int numClicks) {
-    	
+ 
     	Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
         setIconImage(iconImage);
     	Color cRosa= new Color(255,102,196);
@@ -61,8 +60,6 @@ public class PantallaPuntuacion extends JFrame {
         lResumen.setForeground(cRosa);
         lResumen.setFont(new Font("Open Sans", Font.BOLD, 20));
 
-       
-      
         bJugar.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -73,8 +70,6 @@ public class PantallaPuntuacion extends JFrame {
         });
         
         //2.5 Crear botón ranking
-        
-       
       
         bVerRanking.addMouseListener(new MouseAdapter() {
         	@Override
@@ -110,15 +105,13 @@ public class PantallaPuntuacion extends JFrame {
         
         this.setVisible(true);
     }
-    
-    
-    private void verRanking() {
+
+	private void verRanking() {
     	new PantallaRanking();
     	
     }
     
     public static void main(String[] args) {
-    	//Esto es para un ejemplo de uso
     	new PantallaPuntuacion(2,30,50);
     }
 }

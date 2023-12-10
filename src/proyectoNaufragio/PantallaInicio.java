@@ -45,10 +45,8 @@ public class PantallaInicio extends JFrame {
 	private JPasswordField pass;
 	private static ArrayList<Usuario> usuarios;
 
-
 	// Necesario ser publico para gestionarlo entre ventanas
 	public static Clip clip;
-	
 	private AudioInputStream audioInputStream;
 	private static final String filePath = "Media/Musica.wav";
 	
@@ -115,7 +113,6 @@ public class PantallaInicio extends JFrame {
                 } catch (UsuarioIncorrectoException | UsuarioNoEncontradoException ex) {
                     LOG.log(Level.WARNING, ex.getMessage());
                     JOptionPane.showMessageDialog(null, ex.getMessage());
-                    
                 }
             }
         });
@@ -143,10 +140,9 @@ public class PantallaInicio extends JFrame {
 					LOG.log(Level.WARNING, "Intento de registro fallido");
 					JOptionPane.showMessageDialog(null, "Es necesario completar todos los datos");
 				}
-				
 			}
-        	
         });
+        
         bRegistro.setBackground(cRosa);
         s2.add(bRegistro);
         sur.add(s2);
@@ -177,7 +173,6 @@ public class PantallaInicio extends JFrame {
         this.add(este, BorderLayout.EAST);
         this.add(oeste, BorderLayout.WEST);
         this.setVisible(true);
-    	
     }
     
     private void inicializarAudio()  {
@@ -193,16 +188,8 @@ public class PantallaInicio extends JFrame {
     	catch(Exception e)
     	{
     		e.printStackTrace();
-    	}   	
-    	
+    	}
     }
-
-    public static void main(String[] args) {
-    	cargarPropiedades();
-    	usuarios = cargarUsuarios();
-    	new PantallaInicio();
-    }
-    
     
     private static void cargarPropiedades()
     {
@@ -243,5 +230,9 @@ public class PantallaInicio extends JFrame {
     	return usuarios;
     }
     
-    
+    public static void main(String[] args) {
+    	cargarPropiedades();
+    	usuarios = cargarUsuarios();
+    	new PantallaInicio();
+    }
 }

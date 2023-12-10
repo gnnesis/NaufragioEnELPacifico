@@ -16,7 +16,11 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import entidades.Barco;
 import entidades.Nivel;
@@ -29,21 +33,71 @@ public class PantallaModoJuego extends JFrame {
 	private static ArrayList<Nivel> niveles;
 	private static ArrayList<JRadioButton> rTematicas = new ArrayList<>();
 	private static ArrayList<JRadioButton> rNiveles = new ArrayList<>();
+	private Clip clip = PantallaInicio.clip;
 
 	private Logger LOG = Logger.getLogger(PantallaModoJuego.class.getName());
 	
-	public PantallaModoJuego(){
+	public PantallaModoJuego() {
 		
 		cargarPropiedades();
 		Color cRosa = new Color(255,102,196);
 		Font subtitulo = new Font("Arial", Font.BOLD, 18);	
-		
+
 		this.setSize(new Dimension(400,400));
 		this.setTitle("Naufragio en el Pacífico");
 		Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
         setIconImage(iconImage);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLayout(new BorderLayout());
+		
+		JMenuBar menu = new JMenuBar();
+    	JMenu archivo = new JMenu("Archivo");
+    	JMenu musica = new JMenu("Musica");
+    	
+    	JSlider volumen = new JSlider();
+    	volumen.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				int volumen = ((JSlider) e.getSource()).getValue();
+				FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+				float range = gainControl.getMaximum() - gainControl.getMinimum();
+				float gain = (range * volumen / 100.0f) + gainControl.getMinimum();
+				gainControl.setValue(gain);
+			}
+    		
+    	});
+    	
+    	JMenuItem mute = new JMenuItem("Pause/Play");
+    	mute.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (clip.isActive()) {
+					clip.stop();
+				} else {
+					clip.start();
+				}
+			}
+    	});
+    	
+    	musica.add(volumen);
+    	musica.add(mute);
+    	
+    	JMenuItem salir = new JMenuItem("Salir");
+    	salir.addActionListener(new ActionListener() {
+    		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+    	});
+    	
+    	archivo.add(salir);
+    	menu.add(archivo);
+    	menu.add(musica);
+    
+    	setJMenuBar(menu);
+		
 		
 		JPanel norte = new JPanel();
 		JPanel sur = new JPanel();

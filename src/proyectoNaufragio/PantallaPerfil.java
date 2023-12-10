@@ -9,7 +9,6 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,7 +20,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class PantallaPerfil extends JFrame {
 
-	public PantallaPerfil( ) {
+	public PantallaPerfil() {
 		
 		Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
         setIconImage(iconImage);
@@ -143,7 +142,9 @@ public class PantallaPerfil extends JFrame {
         this.setVisible(true);
         
     }
+	    
+
 	 public static void main(String[] args) {
-	        new PantallaPerfil();
+		 new PantallaPerfil();
 	    }
 }
