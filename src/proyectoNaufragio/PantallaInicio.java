@@ -33,6 +33,7 @@ import javax.swing.SwingConstants;
 
 import entidades.Usuario;
 import excepciones.UsuarioIncorrectoException;
+import excepciones.UsuarioNoEncontradoException;
 
 @SuppressWarnings("serial")
 public class PantallaInicio extends JFrame {
@@ -43,6 +44,7 @@ public class PantallaInicio extends JFrame {
 	private JTextField nick;
 	private JPasswordField pass;
 	private static ArrayList<Usuario> usuarios;
+
 
 	// Necesario ser publico para gestionarlo entre ventanas
 	public static Clip clip;
@@ -89,36 +91,35 @@ public class PantallaInicio extends JFrame {
         bEnter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	String username = nick.getText();
-            	String password = String.valueOf(pass.getPassword());
-            	try
-            	{
-            		for(Usuario u : usuarios)
-                	{
-                		if(u.getNickname().equals(username))
-                		{
-                			LOG.log(Level.INFO, "Usuario encontrado");
-                			if(u.comprobarContrasena(password))
-                			{
-                				LOG.log(Level.INFO, "Inicio de sesion correcto");
-                				new PantallaModoJuego();
+                String username = nick.getText();
+                String password = String.valueOf(pass.getPassword());
+                boolean encontrado = false;
+                try {
+                	
+                    for (Usuario u : usuarios) {
+                        if (u.getNickname().equals(username)) {
+                            LOG.log(Level.INFO, "Usuario encontrado");
+                            encontrado=true;
+                            if (u.comprobarContrasena(password)) {
+                                LOG.log(Level.INFO, "Inicio de sesión correcto");
+                                new PantallaModoJuego();
                                 dispose();
-                			}
-                			else
-                			{
-                				throw new UsuarioIncorrectoException();
-                			}
-                		}
-                	}
-            	}
-            	catch(UsuarioIncorrectoException ex){
-            		LOG.log(Level.WARNING, ex.getMessage());
-            		JOptionPane.showMessageDialog(null, ex.getMessage());
-            	}
-            	
-                
+                            } else {
+                                throw new UsuarioIncorrectoException();
+                            }
+                        }
+                    }
+                    if (!encontrado) {
+                        throw new UsuarioNoEncontradoException();
+                    }
+                } catch (UsuarioIncorrectoException | UsuarioNoEncontradoException ex) {
+                    LOG.log(Level.WARNING, ex.getMessage());
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                    
+                }
             }
         });
+        
         s1.add(bEnter);
         sur.add(s1);
         JButton bRegistro = new JButton("REGISTRAR");
