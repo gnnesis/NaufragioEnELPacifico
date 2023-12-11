@@ -91,8 +91,19 @@ public class PantallaModoJuego extends JFrame {
 				dispose();
 			}
     	});
+    	JMenuItem cerrarSesion= new JMenuItem("Cerrar Sesión");
+    	cerrarSesion.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new PantallaInicio();
+				dispose();
+				
+			}
+		});
     	
     	archivo.add(salir);
+    	archivo.add(cerrarSesion);
     	menu.add(archivo);
     	menu.add(musica);
     

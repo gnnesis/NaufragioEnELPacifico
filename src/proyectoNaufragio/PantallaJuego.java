@@ -137,7 +137,20 @@ public class PantallaJuego extends JFrame{
 			}
     	});
     	
+    	
+    	JMenuItem abandonar= new JMenuItem("Abandonar");
+    	abandonar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new PantallaModoJuego();
+				dispose();
+				
+			}
+		});
+    	
     	archivo.add(salir);
+    	archivo.add(abandonar);
     	menu.add(archivo);
     	menu.add(musica);
     
