@@ -14,13 +14,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import entidades.Barco;
 import entidades.Casilla;
@@ -48,6 +56,8 @@ public class PantallaJuego extends JFrame{
 	private Logger LOG = Logger.getLogger(PantallaJuego.class.getName());
 	private Nivel nivel;
 	private Random random = new Random(System.currentTimeMillis());
+	private Clip clip = PantallaInicio.clip;
+
 	
 	public PantallaJuego(String imagenCasilla, Nivel nivel){
 		this.nivel = nivel;
@@ -83,6 +93,55 @@ public class PantallaJuego extends JFrame{
 		} catch (IOException e1) {
 			LOG.log(Level.SEVERE,"Ha ocurrido un error cargando el icono de la celda.");
 		}
+		
+		
+		JMenuBar menu = new JMenuBar();
+    	JMenu archivo = new JMenu("Archivo");
+    	JMenu musica = new JMenu("Musica");
+    	
+    	JSlider volumen = new JSlider();
+    	volumen.addChangeListener((ChangeListener) new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				int volumen = ((JSlider) e.getSource()).getValue();
+				FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+				float range = gainControl.getMaximum() - gainControl.getMinimum();
+				float gain = (range * volumen / 100.0f) + gainControl.getMinimum();
+				gainControl.setValue(gain);
+			}
+    		
+    	});
+    	
+    	JMenuItem mute = new JMenuItem("Pause/Play");
+    	mute.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (clip.isActive()) {
+					clip.stop();
+				} else {
+					clip.start();
+				}
+			}
+    	});
+    	
+    	musica.add(volumen);
+    	musica.add(mute);
+    	
+    	JMenuItem salir = new JMenuItem("Salir");
+    	salir.addActionListener(new ActionListener() {
+    		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+    	});
+    	
+    	archivo.add(salir);
+    	menu.add(archivo);
+    	menu.add(musica);
+    
+    	setJMenuBar(menu);
 		
 		JPanel pantNorte = new JPanel();
 		JPanel pantSur = new JPanel();

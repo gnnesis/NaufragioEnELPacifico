@@ -20,16 +20,23 @@ import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import entidades.Usuario;
 import excepciones.UsuarioIncorrectoException;
@@ -77,6 +84,54 @@ public class PantallaInicio extends JFrame {
         ImageIcon imagen = new ImageIcon(logo);
         Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT));
         limagen.setIcon(icono);
+        
+        JMenuBar menu = new JMenuBar();
+    	JMenu archivo = new JMenu("Archivo");
+    	JMenu musica = new JMenu("Musica");
+    	
+    	JSlider volumen = new JSlider();
+    	volumen.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				int volumen = ((JSlider) e.getSource()).getValue();
+				FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+				float range = gainControl.getMaximum() - gainControl.getMinimum();
+				float gain = (range * volumen / 100.0f) + gainControl.getMinimum();
+				gainControl.setValue(gain);
+			}
+    		
+    	});
+    	
+    	JMenuItem mute = new JMenuItem("Pause/Play");
+    	mute.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (clip.isActive()) {
+					clip.stop();
+				} else {
+					clip.start();
+				}
+			}
+    	});
+    	
+    	musica.add(volumen);
+    	musica.add(mute);
+    	
+    	JMenuItem salir = new JMenuItem("Salir");
+    	salir.addActionListener(new ActionListener() {
+    		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+    	});
+    	
+    	archivo.add(salir);
+    	menu.add(archivo);
+    	menu.add(musica);
+    
+    	setJMenuBar(menu);
 
         // NORTE
         norte.add(limagen);
