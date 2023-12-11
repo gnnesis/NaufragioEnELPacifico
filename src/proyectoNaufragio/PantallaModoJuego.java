@@ -45,6 +45,7 @@ public class PantallaModoJuego extends JFrame {
 
 		this.setSize(new Dimension(400,400));
 		this.setTitle("Naufragio en el Pacífico");
+		setLocationRelativeTo( null );
 		Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
         setIconImage(iconImage);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

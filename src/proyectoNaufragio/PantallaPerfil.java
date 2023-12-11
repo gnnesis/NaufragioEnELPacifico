@@ -40,6 +40,7 @@ public class PantallaPerfil extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(600, 450);
         this.setTitle("Perfil");
+        setLocationRelativeTo( null );
         
         JMenuBar menu = new JMenuBar();
     	JMenu archivo = new JMenu("Archivo");

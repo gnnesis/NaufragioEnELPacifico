@@ -62,8 +62,9 @@ public class PantallaJuego extends JFrame{
 	public PantallaJuego(String imagenCasilla, Nivel nivel){
 		this.nivel = nivel;
 		this.setTitle("Naufragio en el Pacífico");
-		this.setSize(new Dimension(600,600));
+		this.setSize(new Dimension(900,600));
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setLocationRelativeTo( null );
 		Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
         setIconImage(iconImage);
 		this.setLayout(new BorderLayout());

@@ -71,6 +71,7 @@ public class PantallaInicio extends JFrame {
         this.setTitle("Naufragio en el Pacífico");
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLayout(new BorderLayout());
+        setLocationRelativeTo( null );
 
         JPanel norte = new JPanel();
         JPanel sur = new JPanel();
