@@ -179,12 +179,11 @@ public class PantallaJuego extends JFrame{
 								tocados++;
 								l8.setText("" + tocados);
 								try {
-									boton.setIcon(new ImageIcon(ImageIO.read(new File(Rutas.DIR_IMAGENES + "TocadoClasico.png"))));
+									boton.setIcon(new ImageIcon(ImageIO.read(new File(Rutas.DIR_IMAGENES + "Tocado" + imagenCasilla))));
 								} catch (IOException e1) {
 									e1.printStackTrace();
 								}
 								LOG.log(Level.INFO,"La celda contenia un barco.");
-								//boton.setBackground(Color.red);
 								boolean terminado = juegoTerminado();
 								if (terminado) {
 									mostrarPuntuacion();
@@ -194,7 +193,11 @@ public class PantallaJuego extends JFrame{
 							{
 								aguas++;
 								l6.setText(""+aguas);
-								boton.setBackground(Color.blue);
+								try {
+									boton.setIcon(new ImageIcon(ImageIO.read(new File(Rutas.DIR_IMAGENES + "Agua" + imagenCasilla))));
+								} catch (IOException e1) {
+									e1.printStackTrace();
+								}
 							}
 						}
 						

@@ -67,7 +67,7 @@ public class PantallaInicio extends JFrame {
         Color cRosa = new Color(255, 102, 196);
         Color cRosaClaro = new Color(255, 128, 234);
 
-        this.setSize(new Dimension(600, 400));
+        this.setSize(new Dimension(600, 450));
         this.setTitle("Naufragio en el Pacífico");
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLayout(new BorderLayout());
