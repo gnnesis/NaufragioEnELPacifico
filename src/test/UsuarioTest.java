@@ -69,31 +69,17 @@ class UsuarioTest {
 
 	@Test
 	void testRegistrar() {
-    }
-
-    
+		try {
+			u.registrar(FILE_PATH);
+			Files.delete(Paths.get(FILE_PATH));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }    
 
     @Test
     void testGetMd5() {
         assertEquals(CODED_PASS, u.getMd5(PASS));
 
     }
-    /*
-        // Prueba con una cadena simple
-        String input = "password123";
-        String expectedHash = "482c811da5d5b4bc6d497ffa98491e38";
-        assertEquals(expectedHash, u.getMd5(input));
-
-        // Prueba con una cadena vacía
-        input = "";
-        expectedHash = "d41d8cd98f00b204e9800998ecf8427e";
-        assertEquals(expectedHash, u.getMd5(input));
-
-        // Prueba con una cadena más larga y compleja
-        input = "estaEsUnaCadenaLargaYCompleja123!@#";
-        expectedHash = "1e8324765e0b5506fde94626b8a9d7c1";
-        assertEquals(expectedHash, u.getMd5(input));
-        
-	}*/
-
 }
