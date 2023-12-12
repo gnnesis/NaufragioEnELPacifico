@@ -67,11 +67,10 @@ public class PantallaInicio extends JFrame {
         Color cRosa = new Color(255, 102, 196);
         Color cRosaClaro = new Color(255, 128, 234);
 
-        this.setSize(new Dimension(600, 450));
+        this.setSize(new Dimension(600, 400));
         this.setTitle("Naufragio en el Pacífico");
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLayout(new BorderLayout());
-        setLocationRelativeTo( null );
 
         JPanel norte = new JPanel();
         JPanel sur = new JPanel();
@@ -80,10 +79,10 @@ public class PantallaInicio extends JFrame {
         centro.setLayout(new GridLayout(3, 2));
         JPanel este = new JPanel();
         JPanel oeste = new JPanel();
-
+        
         JLabel limagen = new JLabel();
         ImageIcon imagen = new ImageIcon(logo);
-        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT));
+        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(341,128, Image.SCALE_DEFAULT));
         limagen.setIcon(icono);
         
         JMenuBar menu = new JMenuBar();

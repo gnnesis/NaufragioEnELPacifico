@@ -38,7 +38,6 @@ public class PantallaRanking extends JFrame {
 		this.setSize(new Dimension(600,400));
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLayout(new BorderLayout());
-		setLocationRelativeTo( null );
 		
 		JPanel panelPrincipal = new JPanel(new BorderLayout());
 		

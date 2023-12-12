@@ -63,9 +63,8 @@ public class PantallaJuego extends JFrame{
 	public PantallaJuego(String imagenCasilla, Nivel nivel){
 		this.nivel = nivel;
 		this.setTitle("Naufragio en el Pacífico");
-		this.setSize(new Dimension(900,600));
+		this.setSize(new Dimension(600,600));
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setLocationRelativeTo( null );
 		Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
         setIconImage(iconImage);
 		this.setLayout(new BorderLayout());
@@ -139,20 +138,7 @@ public class PantallaJuego extends JFrame{
 			}
     	});
     	
-    	
-    	JMenuItem abandonar= new JMenuItem("Abandonar");
-    	abandonar.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new PantallaModoJuego();
-				dispose();
-				
-			}
-		});
-    	
     	archivo.add(salir);
-    	archivo.add(abandonar);
     	menu.add(archivo);
     	menu.add(musica);
     
@@ -194,11 +180,12 @@ public class PantallaJuego extends JFrame{
 								tocados++;
 								l8.setText("" + tocados);
 								try {
-									boton.setIcon(new ImageIcon(ImageIO.read(new File(Rutas.DIR_IMAGENES + "Tocado" + imagenCasilla))));
+									boton.setIcon(new ImageIcon(ImageIO.read(new File(Rutas.DIR_IMAGENES + "TocadoClasico.png"))));
 								} catch (IOException e1) {
 									e1.printStackTrace();
 								}
 								LOG.log(Level.INFO,"La celda contenia un barco.");
+								//boton.setBackground(Color.red);
 								boolean terminado = juegoTerminado();
 								if (terminado) {
 									mostrarPuntuacion();
@@ -208,11 +195,7 @@ public class PantallaJuego extends JFrame{
 							{
 								aguas++;
 								l6.setText(""+aguas);
-								try {
-									boton.setIcon(new ImageIcon(ImageIO.read(new File(Rutas.DIR_IMAGENES + "Agua" + imagenCasilla))));
-								} catch (IOException e1) {
-									e1.printStackTrace();
-								}
+								boton.setBackground(Color.blue);
 							}
 						}
 						

@@ -29,6 +29,7 @@ import entidades.Nivel;
 public class PantallaModoJuego extends JFrame {
 	
 	private static String FICH_TEMATICAS;
+	public static String INSTRUCCIONES;
 	private static String FICH_NIVELES;
 	private static ArrayList<Nivel> niveles;
 	private static ArrayList<JRadioButton> rTematicas = new ArrayList<>();
@@ -54,6 +55,9 @@ public class PantallaModoJuego extends JFrame {
 		JMenuBar menu = new JMenuBar();
     	JMenu archivo = new JMenu("Archivo");
     	JMenu musica = new JMenu("Musica");
+    	JMenuItem instrucciones = new JMenuItem("Instrucciones");
+    	
+    	
     	
     	JSlider volumen = new JSlider();
     	volumen.addChangeListener(new ChangeListener() {
@@ -103,7 +107,15 @@ public class PantallaModoJuego extends JFrame {
 			}
 		});
     	
+    	instrucciones.addActionListener(new ActionListener(){
+    		@Override
+    		public void actionPerformed(ActionEvent e) {
+    			mostrarInstrucciones();
+    		}
+    	});
+    	
     	archivo.add(salir);
+    	archivo.add(instrucciones);
     	archivo.add(cerrarSesion);
     	menu.add(archivo);
     	menu.add(musica);
@@ -271,9 +283,14 @@ public class PantallaModoJuego extends JFrame {
 			p.load(new FileInputStream(Rutas.FICH_PROPERTIES));
 			FICH_TEMATICAS = p.getProperty("tematicas");
 			FICH_NIVELES = p.getProperty("niveles");
+			INSTRUCCIONES = p.getProperty("instrucciones");
 		} catch (Exception e1) {
 			e1.printStackTrace();
 			LOG.log(Level.WARNING,"No se ha podido cargar el fichero propiedades.");
 		}	
+	}
+	
+	private void mostrarInstrucciones() {
+		JOptionPane.showMessageDialog(null, INSTRUCCIONES);
 	}
 }
