@@ -29,7 +29,7 @@ import entidades.Nivel;
 public class PantallaModoJuego extends JFrame {
 	
 	private static String FICH_TEMATICAS;
-	private static String INSTRUCCIONES;
+	public static String INSTRUCCIONES;
 	private static String FICH_NIVELES;
 	private static ArrayList<Nivel> niveles;
 	private static ArrayList<JRadioButton> rTematicas = new ArrayList<>();
