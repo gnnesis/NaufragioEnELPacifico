@@ -79,10 +79,10 @@ public class PantallaInicio extends JFrame {
         centro.setLayout(new GridLayout(3, 2));
         JPanel este = new JPanel();
         JPanel oeste = new JPanel();
-
+        
         JLabel limagen = new JLabel();
         ImageIcon imagen = new ImageIcon(logo);
-        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT));
+        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(341,128, Image.SCALE_DEFAULT));
         limagen.setIcon(icono);
         
         JMenuBar menu = new JMenuBar();
