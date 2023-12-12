@@ -46,6 +46,7 @@ public class PantallaModoJuego extends JFrame {
 
 		this.setSize(new Dimension(400,400));
 		this.setTitle("Naufragio en el Pacífico");
+		setLocationRelativeTo( null );
 		Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
         setIconImage(iconImage);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -95,6 +96,16 @@ public class PantallaModoJuego extends JFrame {
 				dispose();
 			}
     	});
+    	JMenuItem cerrarSesion= new JMenuItem("Cerrar Sesión");
+    	cerrarSesion.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new PantallaInicio();
+				dispose();
+				
+			}
+		});
     	
     	instrucciones.addActionListener(new ActionListener(){
     		@Override
@@ -105,6 +116,7 @@ public class PantallaModoJuego extends JFrame {
     	
     	archivo.add(salir);
     	archivo.add(instrucciones);
+    	archivo.add(cerrarSesion);
     	menu.add(archivo);
     	menu.add(musica);
     
