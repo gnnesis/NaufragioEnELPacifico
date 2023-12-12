@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -223,9 +224,21 @@ public class PantallaJuego extends JFrame{
 		colocarBarcos();
 		
 		//ESTE
-		JTextArea barcos = new JTextArea("Barco1 \n Barco2 \n Barco3 \n Barco4 \n Barco5 \n");
-		pantEste.add(barcos);
+		String nombreArchivo = imagenCasilla;
+        int indicePunto = nombreArchivo.lastIndexOf('.');
+        String nombreSinExtension = (indicePunto != -1) ? nombreArchivo.substring(0, indicePunto) : nombreArchivo;		
 		
+		JLabel plantBarco = new JLabel();
+		ImageIcon plantBarcoImg = new ImageIcon(Rutas.DIR_IMAGENES + "Plant"+nombreSinExtension+nivel.getColumnas()+"x"+nivel.getFilas()+".png");
+		Image img = plantBarcoImg.getImage().getScaledInstance(200, 500, Image.SCALE_SMOOTH);
+		ImageIcon scaledIcon = new ImageIcon(img);
+
+		plantBarco.setIcon(scaledIcon);
+		pantEste.add(plantBarco);
+		
+		LOG.log(Level.INFO,"Se añade la plantilla de barcos de temática "+nombreSinExtension+" de tamaño "+nivel.getColumnas()+"x"+nivel.getFilas()+".");
+		
+
 		//OESTE
 		pantOeste.add(l1);
 		pantOeste.add(l2);
