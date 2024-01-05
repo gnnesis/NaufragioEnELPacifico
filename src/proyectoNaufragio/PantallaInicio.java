@@ -56,11 +56,11 @@ public class PantallaInicio extends JFrame {
 	// Necesario ser publico para gestionarlo entre ventanas
 	public static Clip clip;
 	private AudioInputStream audioInputStream;
-	private static final String filePath = "Media/Musica.wav";
+	private static final String filePath = "resources/images/Musica.wav";
 	
     public PantallaInicio() {
     	
-    	Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
+    	Image iconImage = new ImageIcon("resources/images/IconoNP.png").getImage();
         setIconImage(iconImage);
     	
         inicializarAudio();
@@ -100,7 +100,6 @@ public class PantallaInicio extends JFrame {
 				float gain = (range * volumen / 100.0f) + gainControl.getMinimum();
 				gainControl.setValue(gain);
 			}
-    		
     	});
     	
     	JMenuItem mute = new JMenuItem("Pause/Play");

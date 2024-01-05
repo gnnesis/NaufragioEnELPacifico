@@ -42,7 +42,7 @@ public class PantallaRanking extends JFrame {
 		
 		this.setTitle("Ranking de Partidas");
 		this.setSize(new Dimension(600,400));
-		Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
+		Image iconImage = new ImageIcon("resources/images/IconoNP.png").getImage();
         setIconImage(iconImage);
 		this.setLayout(new BorderLayout());
 		

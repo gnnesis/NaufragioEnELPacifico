@@ -1,7 +1,6 @@
 package proyectoNaufragio;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -68,11 +67,11 @@ public class PantallaJuego extends JFrame{
 		this.setTitle("Naufragio en el Pacífico");
 		this.setSize(new Dimension(900,600));
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
+		Image iconImage = new ImageIcon("resources/images/IconoNP.png").getImage();
         setIconImage(iconImage);
 		this.setLayout(new BorderLayout());
 		Timer tiempo = new Timer(1000, new ActionListener() {
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				segundos++;

@@ -34,11 +34,10 @@ public class PantallaPuntuacion extends JFrame {
 	private JLabel lClicksTotales;
 	private Clip clip = PantallaInicio.clip;
 	private Usuario u;
-
 	
     public PantallaPuntuacion(Usuario u, int minutos, int segundos, int numClicks) {
     	this.u = u;
-    	Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
+    	Image iconImage = new ImageIcon("resources/images/IconoNP.png").getImage();
         setIconImage(iconImage);
     	Color cRosa= new Color(255,102,196);
     	
@@ -149,7 +148,6 @@ public class PantallaPuntuacion extends JFrame {
         	public void mouseClicked(MouseEvent e) {
         		verRankingGlobal();
         	}
-        	
         });
         
         //3.Diseño de componentes

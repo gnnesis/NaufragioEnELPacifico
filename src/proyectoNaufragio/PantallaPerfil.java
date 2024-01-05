@@ -1,6 +1,5 @@
 package proyectoNaufragio;
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -28,7 +27,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import org.knowm.xchart.QuickChart;
-import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
 
@@ -39,12 +37,9 @@ import entidades.Usuario;
 @SuppressWarnings("serial")
 public class PantallaPerfil extends JFrame {
 	private Clip clip = PantallaInicio.clip;
-	private Usuario u;
-
 
 	public PantallaPerfil(Usuario u) {
-		this.u = u;
-		Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
+		Image iconImage = new ImageIcon("resources/images/IconoNP.png").getImage();
         setIconImage(iconImage);
 		
         this.setVisible(true);
@@ -65,7 +60,6 @@ public class PantallaPerfil extends JFrame {
 				float gain = (range * volumen / 100.0f) + gainControl.getMinimum();
 				gainControl.setValue(gain);
 			}
-    		
     	});
     	
     	JMenuItem mute = new JMenuItem("Pause/Play");
@@ -114,7 +108,7 @@ public class PantallaPerfil extends JFrame {
         pantSur.setLayout(new GridLayout(3, 1));
 
         // NORTE
-        String rutaImagen = "Media/logoNaufragio.png"; 
+        String rutaImagen = "resources/images/logoNaufragio.png"; 
         JLabel Pimagen=new JLabel();
         ImageIcon imagen = new ImageIcon(rutaImagen);
         Icon foto = new ImageIcon(imagen.getImage().getScaledInstance(250, 150, Image.SCALE_DEFAULT));
@@ -142,7 +136,7 @@ public class PantallaPerfil extends JFrame {
         
         // OESTE
         pantOeste.setLayout(new GridLayout(1,1));
-        String rutaFPerfil = "Media/TocadoHalloween.png"; 
+        String rutaFPerfil = "resources/images/TocadoHalloween.png"; 
         JLabel fPerfil=new JLabel();
         ImageIcon perfil = new ImageIcon(rutaFPerfil);
         Icon icono1 = new ImageIcon(perfil.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
@@ -179,7 +173,6 @@ public class PantallaPerfil extends JFrame {
         this.add(pantEste, BorderLayout.EAST);
         this.add(pantOeste, BorderLayout.WEST);
         this.setVisible(true);
-        
     }
 	
 	private void generarEstadisticasUsuario(Usuario u)

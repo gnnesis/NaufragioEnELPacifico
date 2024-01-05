@@ -36,21 +36,19 @@ public class PantallaModoJuego extends JFrame {
 	private static ArrayList<JRadioButton> rTematicas = new ArrayList<>();
 	private static ArrayList<JRadioButton> rNiveles = new ArrayList<>();
 	private Clip clip = PantallaInicio.clip;
-	private Usuario u;
 
 	private Logger LOG = Logger.getLogger(PantallaModoJuego.class.getName());
 	
 	public PantallaModoJuego(Usuario u) {
 		
 		cargarPropiedades();
-		this.u = u;
 		Color cRosa = new Color(255,102,196);
 		Font subtitulo = new Font("Arial", Font.BOLD, 18);	
 
 		this.setSize(new Dimension(400,400));
 		this.setTitle("Naufragio en el Pacífico");
 		setLocationRelativeTo( null );
-		Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
+		Image iconImage = new ImageIcon("resources/images/IconoNP.png").getImage();
         setIconImage(iconImage);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLayout(new BorderLayout());

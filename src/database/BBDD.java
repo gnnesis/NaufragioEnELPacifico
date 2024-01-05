@@ -21,7 +21,7 @@ public class BBDD {
 	private static Connection conn;
 	private boolean abierta = false;
 	private Logger LOG = Logger.getLogger(BBDD.class.getName());
-	private String ruta = "db/Database.db";
+	private String ruta = "resources/db/Database.db";
 	
 	public BBDD() {}
 	
@@ -153,7 +153,6 @@ public class BBDD {
 					aux = new Partida(res.getString(2),res.getInt(3),res.getInt(4));
 					partidas.add(aux);
 				}
-				
 			}
 			catch(SQLException se)
 			{
