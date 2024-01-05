@@ -1,4 +1,4 @@
-package proyectoNaufragio;
+package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -28,12 +28,13 @@ import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import database.BBDD;
-import entidades.Barco;
-import entidades.Casilla;
-import entidades.Nivel;
-import entidades.Partida;
-import entidades.Usuario;
+import db.BBDD;
+import domain.Barco;
+import domain.Casilla;
+import domain.Nivel;
+import domain.Partida;
+import domain.Usuario;
+import io.Rutas;
 
 @SuppressWarnings("serial")
 public class PantallaJuego extends JFrame{

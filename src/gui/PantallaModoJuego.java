@@ -1,4 +1,4 @@
-package proyectoNaufragio;
+package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -22,9 +22,10 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import entidades.Barco;
-import entidades.Nivel;
-import entidades.Usuario;
+import domain.Barco;
+import domain.Nivel;
+import domain.Usuario;
+import io.Rutas;
 
 @SuppressWarnings("serial")
 public class PantallaModoJuego extends JFrame {

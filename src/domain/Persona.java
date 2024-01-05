@@ -1,4 +1,4 @@
-package entidades;
+package domain;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

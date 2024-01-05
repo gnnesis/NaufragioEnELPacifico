@@ -1,4 +1,4 @@
-package excepciones;
+package domain;
 
 @SuppressWarnings("serial")
 public class UsuarioIncorrectoException extends Exception {

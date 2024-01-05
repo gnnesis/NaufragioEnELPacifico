@@ -1,4 +1,4 @@
-package proyectoNaufragio;
+package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -30,9 +30,9 @@ import org.knowm.xchart.QuickChart;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
 
-import database.BBDD;
-import entidades.Partida;
-import entidades.Usuario;
+import db.BBDD;
+import domain.Partida;
+import domain.Usuario;
 
 @SuppressWarnings("serial")
 public class PantallaPerfil extends JFrame {

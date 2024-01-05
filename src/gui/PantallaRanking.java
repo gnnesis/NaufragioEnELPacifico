@@ -1,4 +1,4 @@
-package proyectoNaufragio;
+package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -22,10 +22,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import database.BBDD;
-import entidades.Partida;
-import entidades.RendererTabla;
-import entidades.Usuario;
+import db.BBDD;
+import domain.Partida;
+import domain.RendererTabla;
+import domain.Usuario;
 
 @SuppressWarnings("serial")
 public class PantallaRanking extends JFrame {

@@ -1,4 +1,4 @@
-package database;
+package db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +14,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import entidades.Partida;
+import domain.Partida;
 
 public class BBDD {
 	

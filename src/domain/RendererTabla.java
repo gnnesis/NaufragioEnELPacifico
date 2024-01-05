@@ -1,4 +1,4 @@
-package entidades;
+package domain;
 
 import java.awt.Color;
 import java.awt.Component;

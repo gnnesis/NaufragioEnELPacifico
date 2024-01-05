@@ -1,4 +1,4 @@
-package proyectoNaufragio;
+package io;
 
 public interface Rutas {
 	

@@ -1,4 +1,4 @@
-package entidades;
+package domain;
 
 public class Partida {
 	private String jugador;

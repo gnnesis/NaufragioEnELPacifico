@@ -1,4 +1,4 @@
-package entidades;
+package domain;
 
 public class Usuario extends Persona{
 

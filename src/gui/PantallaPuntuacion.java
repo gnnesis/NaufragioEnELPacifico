@@ -1,4 +1,4 @@
-package proyectoNaufragio;
+package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -25,7 +25,7 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import entidades.Usuario;
+import domain.Usuario;
 
 @SuppressWarnings("serial")
 public class PantallaPuntuacion extends JFrame {
@@ -37,6 +37,13 @@ public class PantallaPuntuacion extends JFrame {
 	
     public PantallaPuntuacion(Usuario u, int minutos, int segundos, int numClicks) {
     	this.u = u;
+    	
+    	this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setSize(600, 400);
+        this.setTitle("Puntuación");
+        this.setLayout(new BorderLayout());
+        setLocationRelativeTo(null);
+        
     	Image iconImage = new ImageIcon("resources/images/IconoNP.png").getImage();
         setIconImage(iconImage);
     	Color cRosa= new Color(255,102,196);
@@ -55,7 +62,6 @@ public class PantallaPuntuacion extends JFrame {
 				float gain = (range * volumen / 100.0f) + gainControl.getMinimum();
 				gainControl.setValue(gain);
 			}
-    		
     	});
     	
     	JMenuItem mute = new JMenuItem("Pause/Play");
@@ -88,13 +94,6 @@ public class PantallaPuntuacion extends JFrame {
     	menu.add(musica);
     
     	setJMenuBar(menu);
-       
-    	// Básicos
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.setSize(600, 400);
-        this.setTitle("Puntuación");
-        this.setLayout(new BorderLayout());
-        setLocationRelativeTo(null);
 
         // 1. Crear contenedores
         JPanel pSuperior = new JPanel();
@@ -140,7 +139,6 @@ public class PantallaPuntuacion extends JFrame {
         	public void mouseClicked(MouseEvent e) {
         		verRanking();
         	}
-        	
         });
         
         bVerRankingGlobal.addMouseListener(new MouseAdapter() {

@@ -1,4 +1,4 @@
-package entidades;
+package domain;
 
 import javax.swing.JButton;
 

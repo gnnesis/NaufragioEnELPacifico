@@ -1,4 +1,4 @@
-package proyectoNaufragio;
+package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -38,10 +38,10 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import database.BBDD;
-import entidades.Usuario;
-import excepciones.UsuarioIncorrectoException;
-import excepciones.UsuarioNoEncontradoException;
+import domain.Usuario;
+import domain.UsuarioIncorrectoException;
+import domain.UsuarioNoEncontradoException;
+import io.Rutas;
 
 @SuppressWarnings("serial")
 public class PantallaInicio extends JFrame {
@@ -59,7 +59,8 @@ public class PantallaInicio extends JFrame {
 	private static final String filePath = "resources/images/Musica.wav";
 	
     public PantallaInicio() {
-    	
+    	cargarPropiedades();
+    	usuarios = cargarUsuarios();
     	Image iconImage = new ImageIcon("resources/images/IconoNP.png").getImage();
         setIconImage(iconImage);
     	
@@ -283,19 +284,5 @@ public class PantallaInicio extends JFrame {
 			e.printStackTrace();
 		}
     	return usuarios;
-    }
-    
-    public static void main(String[] args) {
-    	cargarPropiedades();
-    	usuarios = cargarUsuarios();
-    	
-    	new BBDD().checkEstado().thenAccept(correcto -> {
-    		if(!correcto)
-    		{
-    			JOptionPane.showMessageDialog(null, "No se ha podido establecer conexion con la base de datos");
-    		}
-    	});
-
-    	new PantallaInicio();
     }
 }
