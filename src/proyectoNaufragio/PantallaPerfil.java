@@ -9,6 +9,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Comparator;
+import java.util.List;
 
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
@@ -27,8 +29,11 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import org.knowm.xchart.QuickChart;
 import org.knowm.xchart.SwingWrapper;
+import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
 
+import database.BBDD;
+import entidades.Partida;
 import entidades.Usuario;
 
 @SuppressWarnings("serial")
@@ -179,13 +184,32 @@ public class PantallaPerfil extends JFrame {
 	
 	private void generarEstadisticasUsuario(Usuario u)
 	{
-		double[] xData = new double[] { 0.0, 1.0, 2.0 };
-		double[] yData = new double[] { 2.0, 1.0, 0.0 };
+		BBDD bd = new BBDD();
 		
-		// Create Chart
-		XYChart chart = QuickChart.getChart("Sample Chart", "X", "Y", "y(x)", xData, yData);
+		List<Partida> partidas = bd.obtenerTodasLasPartidas(u.getNickname());
+		double[] tiempos = new double[partidas.size()];
+		double[] clicks = new double[partidas.size()];
+		int i = 0;
+		partidas.sort(Comparator.comparingInt(Partida::getTiempo));
 		
-		new JFrame().add(new SwingWrapper<XYChart>(chart).displayChart());
+		for(Partida p : partidas)
+		{
+			tiempos[i] = p.getTiempo();
+			clicks[i] = p.getClicks();
+			i++;
+		}
+
+        XYChart chart = QuickChart.getChart("Estadísticas de usuario", "Tiempo (segs)", "Clicks", null, tiempos, clicks);
+
+        JFrame frame = new JFrame("Estadísticas");
+        frame.setSize(600, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        XChartPanel<XYChart> chartPanel = new XChartPanel<>(chart);
+
+        frame.getContentPane().add(chartPanel);
+
+        frame.setVisible(true);
 
 	}
 }
