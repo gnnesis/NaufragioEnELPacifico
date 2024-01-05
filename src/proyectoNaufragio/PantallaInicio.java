@@ -38,6 +38,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import database.BBDD;
 import entidades.Usuario;
 import excepciones.UsuarioIncorrectoException;
 import excepciones.UsuarioNoEncontradoException;
@@ -155,7 +156,7 @@ public class PantallaInicio extends JFrame {
                             encontrado=true;
                             if (u.comprobarContrasena(password)) {
                                 LOG.log(Level.INFO, "Inicio de sesión correcto");
-                                new PantallaModoJuego();
+                                new PantallaModoJuego(u);
                                 dispose();
                             } else {
                                 throw new UsuarioIncorrectoException();
@@ -288,6 +289,14 @@ public class PantallaInicio extends JFrame {
     public static void main(String[] args) {
     	cargarPropiedades();
     	usuarios = cargarUsuarios();
+    	
+    	new BBDD().checkEstado().thenAccept(correcto -> {
+    		if(!correcto)
+    		{
+    			JOptionPane.showMessageDialog(null, "No se ha podido establecer conexion con la base de datos");
+    		}
+    	});
+
     	new PantallaInicio();
     }
 }

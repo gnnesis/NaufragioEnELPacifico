@@ -18,6 +18,7 @@ class PartidaTest {
 	@BeforeAll
 	static void init() {
 		partida = new Partida(JUGADOR,TIEMPO,CLICKS);
+		System.out.println(partida);
 	}
 
 	@Test

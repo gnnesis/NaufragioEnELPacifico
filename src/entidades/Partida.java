@@ -41,5 +41,11 @@ public class Partida {
 	public void setClicks(int clicks) {
 		this.clicks = clicks;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Partida [jugador=" + jugador + ", tiempo=" + tiempo + ", clicks=" + clicks + "]";
+	}
 	
 }

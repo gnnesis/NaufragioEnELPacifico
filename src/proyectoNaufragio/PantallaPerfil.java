@@ -20,24 +20,29 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import org.knowm.xchart.QuickChart;
+import org.knowm.xchart.SwingWrapper;
+import org.knowm.xchart.XYChart;
+
+import entidades.Usuario;
 
 @SuppressWarnings("serial")
 public class PantallaPerfil extends JFrame {
 	private Clip clip = PantallaInicio.clip;
+	private Usuario u;
 
 
-	public PantallaPerfil() {
-		
+	public PantallaPerfil(Usuario u) {
+		this.u = u;
 		Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
         setIconImage(iconImage);
 		
         this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(600, 450);
         this.setTitle("Perfil");
         
@@ -117,16 +122,16 @@ public class PantallaPerfil extends JFrame {
         titUs.setFont(new Font("Arial", Font.BOLD, 20));
         pantCentro.add(titUs);
 
-        JLabel usuario = new JLabel("Nickname: XXXX-XXXX");
+        JLabel usuario = new JLabel("Nickname: "+u.getNickname());
         usuario.setSize(new Dimension(50, 50));
         usuario.setBackground(Rosita);
         pantCentro.add(usuario);
 
-        JLabel partidas = new JLabel("Partidas totales: 89");
+        JLabel partidas = new JLabel("Partidas totales: ");
         partidas.setBackground(Rosita);
         pantCentro.add(partidas);
         
-        JLabel tiempoTotal = new JLabel("Tiempo total jugado: 63672 hrs");
+        JLabel tiempoTotal = new JLabel("Tiempo total jugado: ");
         tiempoTotal.setBackground(Rosita);
         pantCentro.add(tiempoTotal);
         
@@ -138,60 +143,30 @@ public class PantallaPerfil extends JFrame {
         Icon icono1 = new ImageIcon(perfil.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
         fPerfil.setIcon(icono1);
         pantOeste.add(fPerfil);
-
-        // ESTE
-        JButton bSonido = new JButton("Sonido");
-        JButton bMusica = new JButton("Música");
-        JButton bInfo = new JButton("Información");
-        bInfo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "BIENVENIDO A NAUFRAGIO EN EL PACÍFICO\r\n"
-                        + "\r\n"
-                        + "* Info general\r\n"
-                        + " - Descripción\r\n"
-                        + "* Reglas de juego\r\n"
-                        + " - Explicación de cómo funciona el juego\r\n"
-                        + "* Contacto\r\n"
-                        + " - Email\r\n"
-                        + " - Tel.\r\n"
-                        + " - Redes sociales");
-            }
-        });
-        pantEste.add(bInfo);
-        pantEste.add(bMusica);
-        pantEste.add(bSonido);
         
         // SUR
-        JPanel filler1 = new JPanel(); // Panel de relleno
-        JPanel filler2 = new JPanel(); // Panel de relleno
+        JPanel filler1 = new JPanel();
         
         JLabel titEstadis = new JLabel("Tus Estadísticas");
         titEstadis.setForeground(RositaClarito);
         titEstadis.setFont(new Font("Arial", Font.BOLD, 20));
         filler1.add(titEstadis);
-        pantSur.add(filler1);
         
-        String rutaFEstadis = "Media/logoNaufragio.png"; 
-        JLabel PEstadis=new JLabel();
-        ImageIcon estadis = new ImageIcon(rutaFEstadis);
-        Icon IEstadis = new ImageIcon(estadis.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
-        PEstadis.setIcon(IEstadis);
-        filler2.add(PEstadis);
-        pantSur.add(filler2);
-                
-        JButton bJugar = new JButton("Modo Juego");
-        bJugar.setBackground(Rosita);
-        bJugar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new PantallaModoJuego();
-                dispose();
-            }
+        JButton filler2 = new JButton("Ver estadisticas");
+        filler2.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SwingUtilities.invokeLater(new Runnable() {
+
+					@Override
+					public void run() {
+						generarEstadisticasUsuario(u);
+					}
+				});
+			}
         });
-        JPanel p1= new JPanel();
-        p1.add(bJugar);
-        pantSur.add(p1);
+        pantSur.add(filler2);
 
         this.add(pantNorte, BorderLayout.NORTH);
         this.add(pantSur, BorderLayout.SOUTH);
@@ -201,9 +176,16 @@ public class PantallaPerfil extends JFrame {
         this.setVisible(true);
         
     }
-	    
+	
+	private void generarEstadisticasUsuario(Usuario u)
+	{
+		double[] xData = new double[] { 0.0, 1.0, 2.0 };
+		double[] yData = new double[] { 2.0, 1.0, 0.0 };
+		
+		// Create Chart
+		XYChart chart = QuickChart.getChart("Sample Chart", "X", "Y", "y(x)", xData, yData);
+		
+		new JFrame().add(new SwingWrapper<XYChart>(chart).displayChart());
 
-	 public static void main(String[] args) {
-		 new PantallaPerfil();
-	    }
+	}
 }

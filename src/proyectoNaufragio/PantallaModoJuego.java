@@ -24,6 +24,7 @@ import javax.swing.event.ChangeListener;
 
 import entidades.Barco;
 import entidades.Nivel;
+import entidades.Usuario;
 
 @SuppressWarnings("serial")
 public class PantallaModoJuego extends JFrame {
@@ -35,12 +36,14 @@ public class PantallaModoJuego extends JFrame {
 	private static ArrayList<JRadioButton> rTematicas = new ArrayList<>();
 	private static ArrayList<JRadioButton> rNiveles = new ArrayList<>();
 	private Clip clip = PantallaInicio.clip;
+	private Usuario u;
 
 	private Logger LOG = Logger.getLogger(PantallaModoJuego.class.getName());
 	
-	public PantallaModoJuego() {
+	public PantallaModoJuego(Usuario u) {
 		
 		cargarPropiedades();
+		this.u = u;
 		Color cRosa = new Color(255,102,196);
 		Font subtitulo = new Font("Arial", Font.BOLD, 18);	
 
@@ -55,9 +58,18 @@ public class PantallaModoJuego extends JFrame {
 		JMenuBar menu = new JMenuBar();
     	JMenu archivo = new JMenu("Archivo");
     	JMenu musica = new JMenu("Musica");
+    	JMenu perfil = new JMenu("Perfil");
+    	JMenuItem verPerfil = new JMenuItem("Ver Perfil");
     	JMenuItem instrucciones = new JMenuItem("Instrucciones");
     	
-    	
+    	verPerfil.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new PantallaPerfil(u);
+			}
+    		
+    	});
     	
     	JSlider volumen = new JSlider();
     	volumen.addChangeListener(new ChangeListener() {
@@ -117,9 +129,10 @@ public class PantallaModoJuego extends JFrame {
     	archivo.add(salir);
     	archivo.add(instrucciones);
     	archivo.add(cerrarSesion);
+    	perfil.add(verPerfil);
     	menu.add(archivo);
     	menu.add(musica);
-    
+    	menu.add(perfil);
     	setJMenuBar(menu);
 		
 		
@@ -164,7 +177,7 @@ public class PantallaModoJuego extends JFrame {
 						n = ni;
 				}
 				
-				new PantallaJuego(tematica + ".png", n);
+				new PantallaJuego(u, tematica + ".png", n);
 				dispose();
 			}
 		});
@@ -174,7 +187,7 @@ public class PantallaModoJuego extends JFrame {
 		JLabel lTablero = new JLabel("DIFICULTAD");
 		lTablero.setFont(subtitulo);
 		centro.add(lTablero);
-		JLabel lTematica = new JLabel("TEMATICA");
+		JLabel lTematica = new JLabel("TEMÁTICA");
 		lTematica.setFont(subtitulo);
 		centro.add(lTematica);
 		

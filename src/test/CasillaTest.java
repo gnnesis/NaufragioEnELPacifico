@@ -39,6 +39,4 @@ class CasillaTest {
 		c.setDestapado(false);
 		assert(!c.isDestapado());
 	}
-
-
 }

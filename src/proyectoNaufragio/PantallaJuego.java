@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,14 +25,16 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
-import javax.swing.JTextArea;
 import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import database.BBDD;
 import entidades.Barco;
 import entidades.Casilla;
 import entidades.Nivel;
+import entidades.Partida;
+import entidades.Usuario;
 
 @SuppressWarnings("serial")
 public class PantallaJuego extends JFrame{
@@ -58,12 +59,14 @@ public class PantallaJuego extends JFrame{
 	private Nivel nivel;
 	private Random random = new Random(System.currentTimeMillis());
 	private Clip clip = PantallaInicio.clip;
+	private Usuario u;
 
 	
-	public PantallaJuego(String imagenCasilla, Nivel nivel){
+	public PantallaJuego(Usuario u, String imagenCasilla, Nivel nivel){
 		this.nivel = nivel;
+		this.u = u;
 		this.setTitle("Naufragio en el Pacífico");
-		this.setSize(new Dimension(600,600));
+		this.setSize(new Dimension(900,600));
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
         setIconImage(iconImage);
@@ -99,6 +102,17 @@ public class PantallaJuego extends JFrame{
 		JMenuBar menu = new JMenuBar();
     	JMenu archivo = new JMenu("Archivo");
     	JMenu musica = new JMenu("Musica");
+    	JMenu perfil = new JMenu("Perfil");
+    	JMenuItem verPerfil = new JMenuItem("Ver Perfil");
+    	
+    	verPerfil.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new PantallaPerfil(u);
+			}
+    		
+    	});
     	
     	JSlider volumen = new JSlider();
     	volumen.addChangeListener((ChangeListener) new ChangeListener() {
@@ -138,10 +152,23 @@ public class PantallaJuego extends JFrame{
 			}
     	});
     	
+    	JMenuItem abandonar= new JMenuItem("Abandonar");
+    	abandonar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new PantallaModoJuego(u);
+				dispose();
+
+			}
+		});
+    	
     	archivo.add(salir);
+    	archivo.add(abandonar);
+    	perfil.add(verPerfil);
     	menu.add(archivo);
     	menu.add(musica);
-    
+    	menu.add(perfil);
     	setJMenuBar(menu);
 		
 		JPanel pantNorte = new JPanel();
@@ -164,42 +191,45 @@ public class PantallaJuego extends JFrame{
 				boton.setIcon(fondo);
 				tablero[i][j] = boton;
 				boton.addActionListener(new ActionListener() {
+				    @Override
+				    public void actionPerformed(ActionEvent e) {
+				        numClicks++;
+				        l4.setText(String.valueOf(numClicks));
 
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						numClicks++;
-						l4.setText(String.valueOf(numClicks));
-						
-						boton.setFocusable(false);
-						if(!boton.isDestapado())
-						{
-							boton.setIcon(null);
-							boton.setDestapado(true);
-							if(boton.isHayBarco())
-							{
-								tocados++;
-								l8.setText("" + tocados);
-								try {
-									boton.setIcon(new ImageIcon(ImageIO.read(new File(Rutas.DIR_IMAGENES + "TocadoClasico.png"))));
-								} catch (IOException e1) {
-									e1.printStackTrace();
-								}
-								LOG.log(Level.INFO,"La celda contenia un barco.");
-								//boton.setBackground(Color.red);
-								boolean terminado = juegoTerminado();
-								if (terminado) {
-									mostrarPuntuacion();
-								}
-							}
-							else
-							{
-								aguas++;
-								l6.setText(""+aguas);
-								boton.setBackground(Color.blue);
-							}
-						}
-						
-					}
+				        boton.setFocusable(false);
+				        if (!boton.isDestapado()) {
+				            boton.setIcon(null);
+				            boton.setDestapado(true);
+				            if (boton.isHayBarco()) {
+				                tocados++;
+				                l8.setText("" + tocados);
+				                try {
+				                    // Escalar la imagen al tamaño del botón
+				                    Image img = ImageIO.read(new File(Rutas.DIR_IMAGENES + "Tocado" + imagenCasilla))
+				                            .getScaledInstance(boton.getWidth(), boton.getHeight(), Image.SCALE_SMOOTH);
+				                    boton.setIcon(new ImageIcon(img));
+				                } catch (IOException e1) {
+				                    e1.printStackTrace();
+				                }
+				                LOG.log(Level.INFO, "La celda contenía un barco.");
+				                boolean terminado = juegoTerminado();
+				                if (terminado) {
+				                    mostrarPuntuacion();
+				                }
+				            } else {
+				                aguas++;
+				                l6.setText("" + aguas);
+				                try {
+				                    // Escalar la imagen al tamaño del botón
+				                    Image img = ImageIO.read(new File(Rutas.DIR_IMAGENES + "Agua" + imagenCasilla))
+				                            .getScaledInstance(boton.getWidth(), boton.getHeight(), Image.SCALE_SMOOTH);
+				                    boton.setIcon(new ImageIcon(img));
+				                } catch (IOException e1) {
+				                    e1.printStackTrace();
+				                }
+				            }
+				        }
+				    }
 				});
 				pantCentro.add(boton);
 			}
@@ -318,7 +348,16 @@ public class PantallaJuego extends JFrame{
 		int clicksTotales = numClicks;
 		JOptionPane.showMessageDialog(null, "Enhorabuena, has solucionado el tablero");
 		LOG.log(Level.INFO, "Tablero finalizado");
-		new PantallaPuntuacion(minutosJuego, segundosJuego, clicksTotales);
+		registrarPuntuacion();
+		new PantallaPuntuacion(u, minutosJuego, segundosJuego, clicksTotales);
 		dispose();
 	}
+	
+	private void registrarPuntuacion()
+	{
+		BBDD bd = new BBDD();
+		Partida p = new Partida(u.getNickname(), minutos*60 + segundos, numClicks);
+		bd.insertarPartida(p);
+	}
 }
+    

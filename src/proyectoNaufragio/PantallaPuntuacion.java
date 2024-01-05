@@ -25,16 +25,19 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import entidades.Usuario;
+
 @SuppressWarnings("serial")
 public class PantallaPuntuacion extends JFrame {
 	
 	private JLabel lTiempo;
 	private JLabel lClicksTotales;
 	private Clip clip = PantallaInicio.clip;
+	private Usuario u;
 
 	
-    public PantallaPuntuacion(int minutos, int segundos, int numClicks) {
- 
+    public PantallaPuntuacion(Usuario u, int minutos, int segundos, int numClicks) {
+    	this.u = u;
     	Image iconImage = new ImageIcon("Media/IconoNP.png").getImage();
         setIconImage(iconImage);
     	Color cRosa= new Color(255,102,196);
@@ -113,6 +116,7 @@ public class PantallaPuntuacion extends JFrame {
         JLabel lResumen = new JLabel("RESUMEN DE LA PARTIDA");
         JButton bJugar= new JButton("VOLVER A JUGAR");
         JButton bVerRanking = new JButton ("VER RANKING");
+        JButton bVerRankingGlobal = new JButton ("VER RANKING GLOBAL");
         
         //Diseño
         lTitulo.setForeground(cRosa);
@@ -125,7 +129,7 @@ public class PantallaPuntuacion extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new PantallaModoJuego();
+				new PantallaModoJuego(u);
 	        	dispose();	
 			}
         });
@@ -140,9 +144,19 @@ public class PantallaPuntuacion extends JFrame {
         	
         });
         
+        bVerRankingGlobal.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		verRankingGlobal();
+        	}
+        	
+        });
+        
         //3.Diseño de componentes
         bJugar.setBackground(cRosa);
-       
+        bVerRanking.setBackground(cRosa);
+        bVerRankingGlobal.setBackground(cRosa);
+        
         lTitulo.setForeground(cRosa);
         lResumen.setForeground(cRosa);
         lResumen.setFont(new Font("Open Sans", Font.BOLD, 16));        
@@ -158,6 +172,7 @@ public class PantallaPuntuacion extends JFrame {
         pCentral.add(lClicksTotales);
         pInferior.add(bJugar) ;
         pInferior.add(bVerRanking);
+        pInferior.add(bVerRankingGlobal);
         
         //5. Añadir bordes y espacios entre componentes
         pSuperior.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
@@ -168,11 +183,10 @@ public class PantallaPuntuacion extends JFrame {
     }
 
 	private void verRanking() {
-    	new PantallaRanking();
-    	
+    	new PantallaRanking(u, false);	
     }
-    
-    public static void main(String[] args) {
-    	new PantallaPuntuacion(2,30,50);
+	
+	private void verRankingGlobal() {
+    	new PantallaRanking(u, true);	
     }
 }
