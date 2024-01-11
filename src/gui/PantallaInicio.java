@@ -223,6 +223,13 @@ public class PantallaInicio extends JFrame {
         p2.add(pass);
         centro.add(p2);
         
+        pass.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                bEnter.doClick();
+            }
+        });
+        
         this.add(norte, BorderLayout.NORTH);
         this.add(sur, BorderLayout.SOUTH);
         this.add(centro, BorderLayout.CENTER);
