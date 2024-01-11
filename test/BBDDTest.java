@@ -1,5 +1,7 @@
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -54,4 +56,18 @@ class BBDDTest {
 		
 		assert(partidas.get("test").size() == 2);
 	}
+	
+	@Test
+   	public void testCheckEstado() throws InterruptedException, ExecutionException {
+        BBDD bd = new BBDD();
+
+        CompletableFuture<Boolean> future = bd.checkEstado();
+
+        assert(!future.isDone());
+
+        Boolean resultado = future.get();
+        
+        assert(future.isDone());
+        assert(resultado);
+    }
 }
