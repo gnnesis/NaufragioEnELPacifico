@@ -15,7 +15,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import domain.Partida;
-
+/**
+ * Clase de acceso a la base de datos
+ * @author izaro
+ *
+ */
 public class BBDD {
 	
 	private static Connection conn;

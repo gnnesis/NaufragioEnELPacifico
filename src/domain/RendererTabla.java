@@ -6,9 +6,17 @@ import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
+/**
+ * Clase RendererTabla
+ * @author izaro, Genesis, Ainhoa
+ *
+ */
 @SuppressWarnings("serial")
 public class RendererTabla extends DefaultTableCellRenderer{
 	
+	/**
+	 * Metodo para definir los diferentes estilos de una tabla
+	 */
 	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col)
 	{
