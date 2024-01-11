@@ -1,9 +1,7 @@
-package test;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import entidades.Casilla;
+import domain.Casilla;
 
 class CasillaTest {
 	

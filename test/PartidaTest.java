@@ -1,12 +1,10 @@
-package test;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import entidades.Partida;
+import domain.Partida;
 
 class PartidaTest {
 	

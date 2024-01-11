@@ -1,11 +1,9 @@
-package test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import entidades.Usuario;
+import domain.Usuario;
 
 class UsuarioTest {
 	

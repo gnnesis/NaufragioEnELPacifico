@@ -1,10 +1,8 @@
-package test;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import entidades.Barco;
-import entidades.Nivel;
+import domain.Barco;
+import domain.Nivel;
 
 class NivelTest {
 	
