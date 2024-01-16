@@ -3,6 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -78,7 +79,9 @@ public class PantallaInicio extends JFrame {
         JPanel sur = new JPanel();
         sur.setLayout(new GridLayout(2, 1)); // (filas,columnas)
         JPanel centro = new JPanel();
-        centro.setLayout(new GridLayout(3, 2));
+        centro.setLayout(new GridLayout(3, 1));
+        JPanel centrodentro = new JPanel();
+        centrodentro.setLayout(new GridLayout(2,2));
         JPanel este = new JPanel();
         JPanel oeste = new JPanel();
         
@@ -206,22 +209,41 @@ public class PantallaInicio extends JFrame {
         // CENTRO
         JLabel inicio = new JLabel("Iniciar sesión");
         JPanel p1 = new JPanel();
+        p1.setLayout(new FlowLayout(FlowLayout.RIGHT));
         JPanel p2 = new JPanel();
+        p2.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JPanel p3 = new JPanel(); 
+        p3.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        JPanel p4 = new JPanel();  
+        p4.setLayout(new FlowLayout(FlowLayout.LEFT));
+        
        
         inicio.setHorizontalAlignment(SwingConstants.CENTER);
         inicio.setFont(new Font("Arial", Font.BOLD, 18));
         centro.add(inicio);
-        nick = new JTextField("Nickname");
+        
+        JLabel labelNick = new JLabel("Nickname:          ");
+        labelNick.setFont(new Font("Arial", Font.PLAIN, 14));
+        p1.add(labelNick);
+        centrodentro.add(p1);
+        
+        nick = new JTextField();
         nick.setSize(new Dimension(50, 50));
         nick.setBackground(cRosaClaro);
-        nick.setColumns(30);
-        p1.add(nick);
-        centro.add(p1);
+        nick.setColumns(20);
+        p2.add(nick);
+        centrodentro.add(p2);
+        
+        JLabel labelContraseña = new JLabel("Contraseña:         ");
+        labelContraseña.setFont(new Font("Arial", Font.PLAIN, 14));
+        p3.add(labelContraseña);
+        centrodentro.add(p3);
+        
         pass = new JPasswordField();
         pass.setBackground(cRosaClaro);
-        pass.setColumns(30);
-        p2.add(pass);
-        centro.add(p2);
+        pass.setColumns(20);
+        p4.add(pass);
+        centrodentro.add(p4);
         
         pass.addActionListener(new ActionListener() {
             @Override
@@ -229,6 +251,8 @@ public class PantallaInicio extends JFrame {
                 bEnter.doClick();
             }
         });
+        
+        centro.add(centrodentro);
         
         this.add(norte, BorderLayout.NORTH);
         this.add(sur, BorderLayout.SOUTH);

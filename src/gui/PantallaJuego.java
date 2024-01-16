@@ -93,6 +93,7 @@ public class PantallaJuego extends JFrame{
 		ImageIcon fondo = null;
 		try {
 			Image img = ImageIO.read(new File(ruta));
+			img = img.getScaledInstance(50, 50, Image.SCALE_SMOOTH); 
 			fondo = new ImageIcon(img);
 		} catch (IOException e1) {
 			LOG.log(Level.SEVERE,"Ha ocurrido un error cargando el icono de la celda.");
