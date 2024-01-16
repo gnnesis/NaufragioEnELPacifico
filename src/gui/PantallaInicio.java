@@ -150,24 +150,18 @@ public class PantallaInicio extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String username = nick.getText();
                 String password = String.valueOf(pass.getPassword());
-                boolean encontrado = false;
+                Usuario u;
                 try {
                 	
-                    for (Usuario u : usuarios) {
-                        if (u.getNickname().equals(username)) {
-                            LOG.log(Level.INFO, "Usuario encontrado");
-                            encontrado=true;
-                            if (u.comprobarContrasena(password)) {
-                                LOG.log(Level.INFO, "Inicio de sesión correcto");
-                                new PantallaModoJuego(u);
-                                dispose();
-                            } else {
-                                throw new UsuarioIncorrectoException();
-                            }
-                        }
-                    }
-                    if (!encontrado) {
+                    u = encontrarUsuario(username, password);
+                	
+                    if (u == null) {
                         throw new UsuarioNoEncontradoException();
+                    }
+                    else
+                    {
+                    	new PantallaModoJuego(u);
+                    	dispose();
                     }
                 } catch (UsuarioIncorrectoException | UsuarioNoEncontradoException ex) {
                     LOG.log(Level.WARNING, ex.getMessage());
@@ -315,5 +309,36 @@ public class PantallaInicio extends JFrame {
 			e.printStackTrace();
 		}
     	return usuarios;
+    }
+    
+    private Usuario encontrarUsuario(String user, String pass) throws UsuarioIncorrectoException
+    {
+    	if(usuarios.size()> 0)
+    		return encontrarUsuarioAux(user, pass, 0);
+    	else
+    		return null;
+    }
+    
+    private Usuario encontrarUsuarioAux(String user, String pass, int pos) throws UsuarioIncorrectoException
+    {
+    	if(pos >= usuarios.size())
+    	{
+    		return null;
+    	}
+    	else if(usuarios.get(pos).getNickname().equals(user))
+    	{
+    		if(usuarios.get(pos).comprobarContrasena(pass))
+    		{
+    			return usuarios.get(pos);
+    		}
+    		else
+    		{
+    			throw new UsuarioIncorrectoException();
+    		}
+    	}
+    	else
+    	{
+    		return encontrarUsuarioAux(user, pass, pos + 1);
+    	}
     }
 }
