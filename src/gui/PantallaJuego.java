@@ -252,7 +252,6 @@ public class PantallaJuego extends JFrame{
 		
 		LOG.log(Level.INFO,"Se añade la plantilla de barcos de temática "+nombreSinExtension+" de tamaño "+nivel.getColumnas()+"x"+nivel.getFilas()+".");
 		
-
 		//OESTE
 		pantOeste.add(l1);
 		pantOeste.add(l2);

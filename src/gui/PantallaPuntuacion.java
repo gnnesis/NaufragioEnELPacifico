@@ -95,28 +95,24 @@ public class PantallaPuntuacion extends JFrame {
     
     	setJMenuBar(menu);
 
-        // 1. Crear contenedores
         JPanel pSuperior = new JPanel();
         JPanel pInferior = new JPanel();
         JPanel pDerecha = new JPanel();
         JPanel pIzquierda = new JPanel();
         JPanel pCentral = new JPanel(new GridLayout(3,1));
 
-        // Ubicar contenedores
         this.add(pSuperior, BorderLayout.NORTH);
         this.add(pInferior, BorderLayout.SOUTH);
         this.add(pDerecha, BorderLayout.EAST);
         this.add(pIzquierda, BorderLayout.WEST);
         this.add(pCentral, BorderLayout.CENTER);
 
-        // 2. Crear componentes
         JLabel lTitulo = new JLabel("NAUFRAGIO EN EL PACÍFICO");
         JLabel lResumen = new JLabel("RESUMEN DE LA PARTIDA");
         JButton bJugar= new JButton("VOLVER A JUGAR");
         JButton bVerRanking = new JButton ("VER RANKING");
         JButton bVerRankingGlobal = new JButton ("VER RANKING GLOBAL");
         
-        //Diseño
         lTitulo.setForeground(cRosa);
         lTitulo.setFont(new Font("Arial", Font.BOLD, 24));
 
@@ -130,10 +126,8 @@ public class PantallaPuntuacion extends JFrame {
 				new PantallaModoJuego(u);
 	        	dispose();	
 			}
-        });
-        
-        //2.5 Crear botón ranking
-      
+        });        
+    
         bVerRanking.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
@@ -148,7 +142,6 @@ public class PantallaPuntuacion extends JFrame {
         	}
         });
         
-        //3.Diseño de componentes
         bJugar.setBackground(cRosa);
         bVerRanking.setBackground(cRosa);
         bVerRankingGlobal.setBackground(cRosa);
@@ -157,11 +150,10 @@ public class PantallaPuntuacion extends JFrame {
         lResumen.setForeground(cRosa);
         lResumen.setFont(new Font("Open Sans", Font.BOLD, 16));        
         
-        //NUEVO
+        
         lTiempo = new JLabel("Tiempo: " + String.format("%02d:%02d", minutos, segundos));
         lClicksTotales = new JLabel ("Clicks totales: " + numClicks);      
         
-        //4.Añadir componentes a contenedores
         pSuperior.add(lTitulo);
         pCentral.add(lResumen);
         pCentral.add(lTiempo);
@@ -170,7 +162,6 @@ public class PantallaPuntuacion extends JFrame {
         pInferior.add(bVerRanking);
         pInferior.add(bVerRankingGlobal);
         
-        //5. Añadir bordes y espacios entre componentes
         pSuperior.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         pCentral.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
         pInferior.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
